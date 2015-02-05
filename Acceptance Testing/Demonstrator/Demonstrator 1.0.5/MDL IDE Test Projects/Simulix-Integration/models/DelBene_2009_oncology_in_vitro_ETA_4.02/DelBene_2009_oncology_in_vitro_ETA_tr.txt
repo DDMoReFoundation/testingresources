@@ -1,0 +1,25 @@
+
+
+[INDIVIDUAL]
+input={POP_LAMBDA0,OMEGA_LAMBDA0}
+
+DEFINITION:
+LAMBDA0 = { distribution = normal, transformation = log, reference = POP_LAMBDA0, var={OMEGA_LAMBDA0}}
+
+[LONGITUDINAL]
+input={LAMBDA0,CONC,CV,N0,K1,K2}
+
+EQUATION:
+NP_0 = N0
+N1_0 = 0
+N2_0 = 0
+N3_0 = 0
+NT = (((NP)+(N1))+(N2))+(N3)
+ddt_NP = ((LAMBDA0)*(NP))-(((K2)*(CONC))*(NP))
+ddt_N1 = (((K2)*(CONC))*(NP))-((K1)*(N1))
+ddt_N2 = ((K1)*(N1))-((K1)*(N2))
+ddt_N3 = ((K1)*(N2))-((K1)*(N3))
+
+DEFINITION:
+Y = { distribution = normal, prediction = NT,  errorModel=proportional(CV)}
+

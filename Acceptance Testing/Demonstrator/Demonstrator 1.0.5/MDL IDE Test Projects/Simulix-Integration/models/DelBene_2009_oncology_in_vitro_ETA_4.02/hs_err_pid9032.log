@@ -1,0 +1,270 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000007fee77a72c7, pid=9032, tid=10560
+#
+# JRE version: 6.0_27-b07
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.2-b06 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# C  [mlxtran.dll+0x2e72c7]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000000688e800):  JavaThread "Rengine Thread" daemon [_thread_in_native, id=10560, stack(0x0000000009e90000,0x000000000ae90000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x000000000000001f
+
+Registers:
+RAX=0x000040053fb7c71b, RBX=0x000000000ae817c0, RCX=0x0000000000000000, RDX=0x000000000ae817c0
+RSP=0x000000000ae815c0, RBP=0x000000000ae817c0, RSI=0x000000000ae820f8, RDI=0x00000000177a31a0
+R8 =0x0000000000000000, R9 =0x0000000000000000, R10=0x7efefefefeff3f3f, R11=0x000000000ae820f8
+R12=0x00000000177efd50, R13=0x00000000177efcd0, R14=0x000000000ae844d0, R15=0x000000000ae844f0
+RIP=0x000007fee77a72c7, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x000000000ae815c0)
+0x000000000ae815c0:   000000000ae81540 000000000ae85f70
+0x000000000ae815d0:   000000000ae815d0 2d64656d006d7500
+0x000000000ae815e0:   fffffffffffffffe fffffffffffffffe
+0x000000000ae815f0:   000000000000000f 0000000000000000
+0x000000000ae81600:   0000000000000000 0000000000000000
+0x000000000ae81610:   0000000016d24cd0 00000000000005dc
+0x000000000ae81620:   00000000ffffffff 000000000ae81628
+0x000000000ae81630:   2d6465006d726500 00000700656c7572
+0x000000000ae81640:   0000000000000000 000000000000000f
+0x000000000ae81650:   000040053fb7c7bb 0000000000000000
+0x000000000ae81660:   000040053fb7c7ab 000007fee78a59fc
+0x000000000ae81670:   000000000ae817c0 000007fee78a5933
+0x000000000ae81680:   000000001780fad0 000007fee74cb4e4
+0x000000000ae81690:   000000001780fad0 0000000000000000
+0x000000000ae816a0:   000040053fb7c71b 0000000000000000
+0x000000000ae816b0:   000000001780fad0 000007fee78a84dc 
+
+Instructions: (pc=0x000007fee77a72c7)
+0x000007fee77a72a7:   00 00 48 c7 44 24 20 fe ff ff ff 48 8b 05 c7 f5
+0x000007fee77a72b7:   63 00 48 33 c4 48 89 84 24 e0 00 00 00 48 8b da
+0x000007fee77a72c7:   44 0f b6 41 1f 41 0f b6 d0 80 e2 fe 80 fa 08 75
+0x000007fee77a72d7:   0d 48 8b d3 48 8b 09 e8 bd ff ff ff eb 75 41 0f 
+
+
+Register to memory mapping:
+
+RAX=0x000040053fb7c71b is an unknown value
+RBX=0x000000000ae817c0 is pointing into the stack for thread: 0x000000000688e800
+RCX=0x0000000000000000 is an unknown value
+RDX=0x000000000ae817c0 is pointing into the stack for thread: 0x000000000688e800
+RSP=0x000000000ae815c0 is pointing into the stack for thread: 0x000000000688e800
+RBP=0x000000000ae817c0 is pointing into the stack for thread: 0x000000000688e800
+RSI=0x000000000ae820f8 is pointing into the stack for thread: 0x000000000688e800
+RDI=0x00000000177a31a0 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x0000000000000000 is an unknown value
+R10=0x7efefefefeff3f3f is an unknown value
+R11=0x000000000ae820f8 is pointing into the stack for thread: 0x000000000688e800
+R12=0x00000000177efd50 is an unknown value
+R13=0x00000000177efcd0 is an unknown value
+R14=0x000000000ae844d0 is pointing into the stack for thread: 0x000000000688e800
+R15=0x000000000ae844f0 is pointing into the stack for thread: 0x000000000688e800
+
+
+Stack: [0x0000000009e90000,0x000000000ae90000],  sp=0x000000000ae815c0,  free space=16325k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [mlxtran.dll+0x2e72c7]  mlxboost::serialization::singleton<mlxboost::archive::detail::iserializer<mlxboost::archive::polymorphic_iarchive,lixoft::mlxtran::v1::Dependencies> >::get_const_instance+0x107
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.rosuda.JRI.Rengine.rniRunMainLoop()V+0
+j  org.rosuda.JRI.Rengine.run()V+81
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+=>0x000000000688e800 JavaThread "Rengine Thread" daemon [_thread_in_native, id=10560, stack(0x0000000009e90000,0x000000000ae90000)]
+  0x000000000688e000 JavaThread "RMI TCP Connection(3)-127.0.0.1" daemon [_thread_blocked, id=10992, stack(0x0000000009d90000,0x0000000009e90000)]
+  0x000000000688d000 JavaThread "DestroyJavaVM" [_thread_blocked, id=4308, stack(0x0000000002500000,0x0000000002600000)]
+  0x000000000688b800 JavaThread "RMI Scheduler(0)" daemon [_thread_blocked, id=6764, stack(0x0000000009b90000,0x0000000009c90000)]
+  0x000000000688b000 JavaThread "GC Daemon" daemon [_thread_blocked, id=4484, stack(0x0000000009a90000,0x0000000009b90000)]
+  0x000000000688a800 JavaThread "RMI Reaper" [_thread_blocked, id=6088, stack(0x00000000090d0000,0x00000000091d0000)]
+  0x0000000006889800 JavaThread "RMI TCP Accept-0" daemon [_thread_in_native, id=3980, stack(0x0000000008f70000,0x0000000009070000)]
+  0x0000000006889000 JavaThread "AWT-Windows" daemon [_thread_in_native, id=10752, stack(0x0000000007ab0000,0x0000000007bb0000)]
+  0x0000000006887800 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=7348, stack(0x00000000078b0000,0x00000000079b0000)]
+  0x0000000006886800 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=8384, stack(0x0000000006f30000,0x0000000007030000)]
+  0x00000000068a0000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=7440, stack(0x0000000006e30000,0x0000000006f30000)]
+  0x000000000689b000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=6452, stack(0x0000000006d30000,0x0000000006e30000)]
+  0x0000000006886000 JavaThread "Attach Listener" daemon [_thread_blocked, id=11244, stack(0x0000000006c30000,0x0000000006d30000)]
+  0x0000000006885000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=10972, stack(0x0000000006b30000,0x0000000006c30000)]
+  0x0000000006835800 JavaThread "Finalizer" daemon [_thread_blocked, id=5500, stack(0x0000000006a30000,0x0000000006b30000)]
+  0x00000000002ca000 JavaThread "Reference Handler" daemon [_thread_blocked, id=7384, stack(0x0000000006730000,0x0000000006830000)]
+
+Other Threads:
+  0x00000000002c2000 VMThread [stack: 0x0000000006630000,0x0000000006730000] [id=10692]
+  0x00000000068bb000 WatcherThread [stack: 0x0000000007030000,0x0000000007130000] [id=6688]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 38080K, used 23099K [0x00000007d58b0000, 0x00000007d8320000, 0x0000000800000000)
+  eden space 32704K, 70% used [0x00000007d58b0000,0x00000007d6f3efd0,0x00000007d78a0000)
+  from space 5376K, 0% used [0x00000007d7de0000,0x00000007d7de0000,0x00000007d8320000)
+  to   space 5376K, 0% used [0x00000007d78a0000,0x00000007d78a0000,0x00000007d7de0000)
+ PSOldGen        total 86976K, used 751K [0x0000000780a00000, 0x0000000785ef0000, 0x00000007d58b0000)
+  object space 86976K, 0% used [0x0000000780a00000,0x0000000780abbcd0,0x0000000785ef0000)
+ PSPermGen       total 23296K, used 13793K [0x000000077b800000, 0x000000077cec0000, 0x0000000780a00000)
+  object space 23296K, 59% used [0x000000077b800000,0x000000077c5785c0,0x000000077cec0000)
+
+Code Cache  [0x0000000002600000, 0x0000000002870000, 0x0000000005600000)
+ total_blobs=590 nmethods=116 adapters=427 free_code_cache=49248256 largest_free_block=13824
+
+Dynamic libraries:
+0x0000000000400000 - 0x000000000042e000 	C:\SEE\MDL_IDE\jre\bin\javaw.exe
+0x0000000077940000 - 0x0000000077ae9000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077820000 - 0x000000007793f000 	C:\Windows\system32\kernel32.dll
+0x000007fefdf50000 - 0x000007fefdfbc000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fefe320000 - 0x000007fefe3fb000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefe180000 - 0x000007fefe21f000 	C:\Windows\system32\msvcrt.dll
+0x000007fefe570000 - 0x000007fefe58f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fefe590000 - 0x000007fefe6bd000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077240000 - 0x000000007733a000 	C:\Windows\system32\USER32.dll
+0x000007feffb10000 - 0x000007feffb77000 	C:\Windows\system32\GDI32.dll
+0x000007fefe400000 - 0x000007fefe40e000 	C:\Windows\system32\LPK.dll
+0x000007fefeb10000 - 0x000007fefebd9000 	C:\Windows\system32\USP10.dll
+0x000007feffc20000 - 0x000007feffc4e000 	C:\Windows\system32\IMM32.DLL
+0x000007fefe460000 - 0x000007fefe569000 	C:\Windows\system32\MSCTF.dll
+0x000007fefdd60000 - 0x000007fefdd92000 	C:\Windows\system32\nvinitx.dll
+0x000000006d890000 - 0x000000006e048000 	C:\SEE\MDL_IDE\jre\bin\server\jvm.dll
+0x000007fefbe70000 - 0x000007fefbeab000 	C:\Windows\system32\WINMM.dll
+0x000000006d800000 - 0x000000006d80e000 	C:\SEE\MDL_IDE\jre\bin\verify.dll
+0x000000006d450000 - 0x000000006d477000 	C:\SEE\MDL_IDE\jre\bin\java.dll
+0x000000006d850000 - 0x000000006d862000 	C:\SEE\MDL_IDE\jre\bin\zip.dll
+0x0000000062d80000 - 0x0000000062da7000 	C:\SEE-new\R\R-3.0.3\library\rj\jri\x64\jri.dll
+0x000000006c700000 - 0x000000006cac1000 	C:\SEE-new\R\R-3.0.3\bin\x64\R.dll
+0x0000000064e80000 - 0x0000000064eda000 	C:\SEE-new\R\R-3.0.3\bin\x64\Rblas.dll
+0x00000000641c0000 - 0x00000000641e5000 	C:\SEE-new\R\R-3.0.3\bin\x64\Riconv.dll
+0x0000000063540000 - 0x00000000635b0000 	C:\SEE-new\R\R-3.0.3\bin\x64\Rgraphapp.dll
+0x000007fefc5a0000 - 0x000007fefc794000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_fa396087175ac9ac\COMCTL32.dll
+0x000007fefe2a0000 - 0x000007fefe311000 	C:\Windows\system32\SHLWAPI.dll
+0x000007feff990000 - 0x000007feffa27000 	C:\Windows\system32\comdlg32.dll
+0x000007fefec00000 - 0x000007feff988000 	C:\Windows\system32\SHELL32.dll
+0x000007fef92b0000 - 0x000007fef92b7000 	C:\Windows\system32\MSIMG32.dll
+0x000000006f8c0000 - 0x000000006f8f2000 	C:\SEE-new\R\R-3.0.3\bin\x64\Rzlib.dll
+0x000007fefcce0000 - 0x000007fefccec000 	C:\Windows\system32\VERSION.dll
+0x000000006d0a0000 - 0x000000006d263000 	C:\SEE\MDL_IDE\jre\bin\awt.dll
+0x000007fefbc50000 - 0x000007fefbcc1000 	C:\Windows\system32\WINSPOOL.DRV
+0x000007fefe8a0000 - 0x000007fefeaa3000 	C:\Windows\system32\ole32.dll
+0x000007fefbfa0000 - 0x000007fefbfb8000 	C:\Windows\system32\DWMAPI.DLL
+0x000007fefc540000 - 0x000007fefc596000 	C:\Windows\system32\uxtheme.dll
+0x000007fefdc90000 - 0x000007fefdc9f000 	C:\Windows\system32\CRYPTBASE.dll
+0x000000006d340000 - 0x000000006d3a6000 	C:\SEE\MDL_IDE\jre\bin\fontmanager.dll
+0x000007fefd5f0000 - 0x000007fefd607000 	C:\Windows\system32\CRYPTSP.dll
+0x000007fefd2f0000 - 0x000007fefd337000 	C:\Windows\system32\rsaenh.dll
+0x000007fefd1d0000 - 0x000007fefd1ee000 	C:\Windows\system32\USERENV.dll
+0x000007fefdda0000 - 0x000007fefddaf000 	C:\Windows\system32\profapi.dll
+0x000000006d6a0000 - 0x000000006d6b7000 	C:\SEE\MDL_IDE\jre\bin\net.dll
+0x000007fefe410000 - 0x000007fefe45d000 	C:\Windows\system32\WS2_32.dll
+0x000007fefe170000 - 0x000007fefe178000 	C:\Windows\system32\NSI.dll
+0x000007fefd590000 - 0x000007fefd5e5000 	C:\Windows\system32\mswsock.dll
+0x000007fefd580000 - 0x000007fefd587000 	C:\Windows\System32\wship6.dll
+0x000007fefb3d0000 - 0x000007fefb3e5000 	C:\Windows\system32\NLAapi.dll
+0x000007fef56b0000 - 0x000007fef56c5000 	C:\Windows\system32\napinsp.dll
+0x000007fef56d0000 - 0x000007fef56e9000 	C:\Windows\system32\pnrpnsp.dll
+0x000007fef8cb0000 - 0x000007fef8cdf000 	C:\Program Files\Common Files\Microsoft Shared\Windows Live\WLIDNSP.DLL
+0x0000000077b10000 - 0x0000000077b17000 	C:\Windows\system32\PSAPI.DLL
+0x000007fefd410000 - 0x000007fefd46b000 	C:\Windows\system32\DNSAPI.dll
+0x000007fef5980000 - 0x000007fef598b000 	C:\Windows\System32\winrnr.dll
+0x000007fef5970000 - 0x000007fef5980000 	C:\Windows\system32\wshbth.dll
+0x000007fefcdb0000 - 0x000007fefcdb7000 	C:\Windows\System32\wshtcpip.dll
+0x000007fefb090000 - 0x000007fefb0b7000 	C:\Windows\system32\IPHLPAPI.DLL
+0x000007fefb080000 - 0x000007fefb08b000 	C:\Windows\system32\WINNSI.DLL
+0x000007fef81a0000 - 0x000007fef81a8000 	C:\Windows\system32\rasadhlp.dll
+0x000007fefae20000 - 0x000007fefae73000 	C:\Windows\System32\fwpuclnt.dll
+0x000000006d740000 - 0x000000006d746000 	C:\SEE\MDL_IDE\jre\bin\rmi.dll
+0x000000006e5c0000 - 0x000000006e5e6000 	C:\SEE-new\R\R-3.0.3\library\utils\libs\x64\utils.dll
+0x0000000064a40000 - 0x0000000064a53000 	C:\SEE-new\R\R-3.0.3\library\methods\libs\x64\methods.dll
+0x000000006fc80000 - 0x000000006fcd0000 	C:\SEE-new\R\R-3.0.3\library\grDevices\libs\x64\grDevices.dll
+0x0000000063740000 - 0x0000000063785000 	C:\SEE-new\R\R-3.0.3\library\graphics\libs\x64\graphics.dll
+0x0000000071100000 - 0x000000007119c000 	C:\SEE-new\R\R-3.0.3\library\stats\libs\x64\stats.dll
+0x000000000c310000 - 0x000000000c599000 	C:\SEE-new\R\R-3.0.3\bin\x64\Rlapack.dll
+0x0000000010000000 - 0x00000000100a8000 	C:\Users\mrogalski\.swt\lib\win32\x86_64\swt-win32-4236.dll
+0x000007feffa30000 - 0x000007feffb07000 	C:\Windows\system32\OLEAUT32.dll
+0x0000000077340000 - 0x000000007749b000 	C:\Windows\system32\WININET.dll
+0x0000000077b00000 - 0x0000000077b03000 	C:\Windows\system32\Normaliz.dll
+0x00000000774a0000 - 0x00000000776b2000 	C:\Windows\system32\iertutil.dll
+0x00000000776c0000 - 0x0000000077817000 	C:\Windows\system32\urlmon.dll
+0x000007fefdfc0000 - 0x000007fefe12c000 	C:\Windows\system32\CRYPT32.dll
+0x000007fefde40000 - 0x000007fefde4f000 	C:\Windows\system32\MSASN1.dll
+0x00000000079d0000 - 0x0000000007a35000 	C:\Program Files\WIDCOMM\Bluetooth Software\btmmhook.dll
+0x000007fefbfc0000 - 0x000007fefc0ec000 	C:\Windows\system32\propsys.dll
+0x000007feffb80000 - 0x000007feffc19000 	C:\Windows\system32\CLBCatQ.DLL
+0x0000000069640000 - 0x0000000069659000 	C:\SEE-new\R\R-3.0.3\library\rj.gd\libs\x64\rj.gd.dll
+0x0000000063d00000 - 0x0000000063d0e000 	C:\SEE-new\R\R-3.0.3\library\bitops\libs\x64\bitops.dll
+0x0000000063140000 - 0x0000000063345000 	C:\SEE-new\R\R-3.0.3\library\RCurl\libs\x64\RCurl.dll
+0x000007fefeab0000 - 0x000007fefeb02000 	C:\Windows\system32\WLDAP32.dll
+0x0000000062e80000 - 0x0000000062f27000 	C:\SEE-new\R\R-3.0.3\library\rjson\libs\x64\rjson.dll
+0x000000006d400000 - 0x000000006d41c000 	C:\SEE-new\R\R-3.0.3\library\tools\libs\x64\tools.dll
+0x000000006ea80000 - 0x000000006eaa6000 	C:\SEE-new\R\R-3.0.3\library\grid\libs\x64\grid.dll
+0x0000000008930000 - 0x000000000893f000 	C:\SEE-new\R\R-3.0.3\library\lattice\libs\x64\lattice.dll
+0x00000000637c0000 - 0x00000000639df000 	C:\SEE-new\R\R-3.0.3\library\XML\libs\x64\XML.dll
+0x000000006f7c0000 - 0x000000006f7cf000 	C:\SEE-new\R\R-3.0.3\library\splines\libs\x64\splines.dll
+0x0000000065f00000 - 0x0000000065f2b000 	C:\SEE-new\R\R-3.0.3\library\gam\libs\x64\gam.dll
+0x00000000688c0000 - 0x00000000688e8000 	C:\SEE-new\R\R-3.0.3\library\survival\libs\x64\survival.dll
+0x000000006d280000 - 0x000000006d295000 	C:\SEE-new\R\R-3.0.3\library\acepack\libs\x64\acepack.dll
+0x000000006ea40000 - 0x000000006ea58000 	C:\SEE-new\R\R-3.0.3\library\cluster\libs\x64\cluster.dll
+0x0000000066140000 - 0x0000000066161000 	C:\SEE-new\R\R-3.0.3\library\foreign\libs\x64\foreign.dll
+0x000000006b480000 - 0x000000006b490000 	C:\SEE-new\R\R-3.0.3\library\nnet\libs\x64\nnet.dll
+0x000000000ce60000 - 0x000000000ce76000 	C:\SEE-new\R\R-3.0.3\library\rpart\libs\x64\rpart.dll
+0x000000006fa00000 - 0x000000006fa11000 	C:\SEE-new\R\R-3.0.3\library\Hmisc\libs\x64\Hmisc.dll
+0x000007fefdc30000 - 0x000007fefdc87000 	C:\Windows\system32\apphelp.dll
+0x000000006c500000 - 0x000000006c51f000 	C:\SEE-new\R\R-3.0.3\library\digest\libs\x64\digest.dll
+0x000000006abc0000 - 0x000000006acd2000 	C:\SEE-new\R\R-3.0.3\library\Rcpp\libs\x64\Rcpp.dll
+0x0000000066340000 - 0x00000000663f6000 	C:\SEE-new\R\R-3.0.3\library\plyr\libs\x64\plyr.dll
+0x000000006e680000 - 0x000000006e73b000 	C:\SEE-new\R\R-3.0.3\library\reshape2\libs\x64\reshape2.dll
+0x00000000657c0000 - 0x00000000657d6000 	C:\SEE-new\R\R-3.0.3\library\colorspace\libs\x64\colorspace.dll
+0x000000006ed40000 - 0x000000006ed51000 	C:\SEE-new\R\R-3.0.3\library\MASS\libs\x64\MASS.dll
+0x000007fefda30000 - 0x000007fefda3b000 	C:\Windows\system32\secur32.dll
+0x000007fefdc00000 - 0x000007fefdc25000 	C:\Windows\system32\SSPICLI.DLL
+0x000000006e400000 - 0x000000006e552000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\mlxComputeR.dll
+0x000007fef4970000 - 0x000007fef49f0000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\mlxCompute_CAPI.dll
+0x000007fee87e0000 - 0x000007fee8d69000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\lixoftCore.dll
+0x0000000016a90000 - 0x0000000016d42000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\QtCorelixoft4.dll
+0x0000000050e80000 - 0x0000000050f18000 	C:\Windows\system32\MSVCP100.dll
+0x0000000050da0000 - 0x0000000050e71000 	C:\Windows\system32\MSVCR100.dll
+0x0000000016d60000 - 0x0000000017639000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\QtGuilixoft4.dll
+0x000007fee74c0000 - 0x000007fee7e42000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\mlxtran.dll
+0x000007fef7040000 - 0x000007fef7060000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\sundials_cvode.dll
+0x000007fefbb10000 - 0x000007fefbb19000 	C:\SEE-new\MlxLibrary1.1.0x64\lib\sundials_nvecserial.dll
+0x000007fefafb0000 - 0x000007fefafc8000 	C:\Windows\system32\dhcpcsvc.DLL
+
+VM Arguments:
+jvm_args: -Djava.security.policy=jar:file:/C:/SEE-new/MDL_IDE/plugins/de.walware.rj.server_1.1.3.b201309081345E42sw.jar!/localhost.policy -Djava.rmi.server.hostname=127.0.0.1 -Dfile.encoding=Cp1252 
+java_command: de.walware.rj.server.RMIServerControl start rmi://127.0.0.1:51234/rjs-local-1423046962823 -auth=none -embedded -plugins=awt,swt,
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\SEE\MDL_IDE
+PATH=C:\SEE-new\R\R-3.0.3\bin\x64;C:/SEE-new/MDL_IDE/jre/bin/server;C:/SEE-new/MDL_IDE/jre/bin;C:/SEE-new/MDL_IDE/jre/lib/amd64;C:\PHSTMinGW\bin;C:\Program Files (x86)\Pharsight\Phoenix\application\Plugins\DrugModelEffects\Executables\;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Intel\DMIX;C:\Program Files (x86)\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;C:\Program Files\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;C:\Program Files (x86)\Intel\Services\IPT\;C:\Program Files (x86)\Common Files\Roxio Shared\OEM\DLLShared\;C:\Program Files (x86)\Common Files\Roxio Shared\OEM\DLLShared\;C:\Program Files (x86)\Common Files\Roxio Shared\OEM\12.0\DLLShared\;C:\Program Files (x86)\Roxio\OEM\AudioCore\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Fies\TortoiseSVN\bin;c\bin;C:\Program Files\R\R-2.13.1\bin\x64\;C:\Program Files\apache-maven-3.0.4\bin;C:\Program Files\apache-ant-1.8.2\;C:\Program Files\Java\jdk1.6.0_25\bin;C:\Program Files (x86)\Git\cmd;C:\Program Files\Oracle\VirtualBox;C:\Program Files\apache-ant-1.8.2\\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Groovy\Groovy-2.2.1\bin;C:\MiKTeX29\miktex\bin\;C:\Program Files (x86)\Kaspersky Lab\Kaspersky Endpoint Security 10 for Windows\;C:\Users\mrogalski\AppData\Roaming\npm\;C:\Users\mrogalski\AppData\Local\Gource\cmd;C:\Program Files (x86)\Git\bin;.;;C:\SEE-new\MDL_IDE;;.;;C:\SEE-new\MlxLibrary1.1.0x64/tools/MinGW/bin
+USERNAME=mrogalski
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 42 Stepping 7, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 Service Pack 1
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 42 stepping 7, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 8344472k(2884224k free), swap 15510612k(8009648k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (20.2-b06) for windows-amd64 JRE (1.6.0_27-b07), built on Jul 19 2011 01:08:22 by "java_re" with MS VC++ 8.0 (VS2005)
+
+time: Wed Feb 04 10:51:21 2015
+elapsed time: 116 seconds
+

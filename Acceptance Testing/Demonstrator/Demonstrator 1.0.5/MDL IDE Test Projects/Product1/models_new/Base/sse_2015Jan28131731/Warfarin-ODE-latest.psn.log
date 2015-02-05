@@ -1,0 +1,5 @@
+Starting 20 NONMEM executions. 5 in parallel.
+S:1 .. S:3 .. S:5 .. S:7 .. S:9 .. S:11 .. S:13 .. S:15 .. S:17 .. S:19 .. S:20 .. Waiting for all NONMEM runs to finish:
+F:16 .. F:19 .. F:20 ..  done
+
+sse done

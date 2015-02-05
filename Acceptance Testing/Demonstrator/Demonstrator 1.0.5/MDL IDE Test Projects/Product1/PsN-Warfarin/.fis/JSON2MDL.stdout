@@ -1,0 +1,12 @@
+Invoking converter toolbox command : C:\SEE-new\fis\..\converter-toolbox-distribution\converter-toolbox\convert.bat C:\SEE-new\MDL_IDE\workspace\Product1\PsN-Warfarin\output.json C:\SEE-new\MDL_IDE\workspace\Product1\PsN-Warfarin JSON 6.0.7 MDL 6.0.7
+
+Using Java from SEE
+2015-02-04 14:06:46,414 0    [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2nonmem.MDLToNonmemConverter from:[MDL 5.0.8] to:[NMTRAN 7.2.0]
+2015-02-04 14:06:46,416 2    [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2pharmml.MDLToPharmMLConverter from:[MDL 6.0.7] to:[PharmML 0.3.1]
+2015-02-04 14:06:46,662 248  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2json.MDLToJSONConverter from:[MDL 6.0.7] to:[JSON 6.0.7]
+2015-02-04 14:06:46,667 253  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2json.JSONToMDLConverter from:[JSON 6.0.7] to:[MDL 6.0.7]
+2015-02-04 14:06:46,706 292  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converters.nonmem.ConverterProvider from:[PharmML 0.3.1] to:[NMTRAN 7.2.0]
+2015-02-04 14:06:46,997 583  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.lixoft.pharmml2mlxproject.PharmMLToMonolixProjectConverter from:[PharmML 0.3.1] to:[MonolixProject 4.3.2]
+2015-02-04 14:06:47,018 604  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Valid converter found: ConverterImpl [provider=MDLTOJSONConverter [source=JSON 6.0.7, target=MDL 6.0.7, converterVersion=1.0.5]]
+2015-02-04 14:06:47,374 960  [main] INFO  eu.ddmore.convertertoolbox.cli.Main  - ConversionReportImpl [returnCode=SUCCESS, details=[]]
+ConversionReportImpl [returnCode=SUCCESS, details=[]]

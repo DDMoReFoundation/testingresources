@@ -1,0 +1,92 @@
+Starting 1 NONMEM executions. 1 in parallel.
+
+Warning:
+ Found STANDARD/CORRELATION/CHOLESKY in control stream.
+This is not yet supported by PsN. Errors will be introduced when
+updating initial estimates to final estimates from previous run
+and sumo output will be wrong.
+
+Warning:
+ Found STANDARD/CORRELATION/CHOLESKY in control stream.
+This is not yet supported by PsN. Errors will be introduced when
+updating initial estimates to final estimates from previous run
+and sumo output will be wrong.
+S:1 .. 
+All executions started.
+doing nmtran
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+
+ (MU_WARNING 26) DATA ITEM(S) USED IN DEFINITION OF MU_(S) SHOULD BE CONSTANT FOR INDIV. REC.:
+  LOGTWT
+ CREATING MUMODEL ROUTINE...
+        1 file(s) copied.
+Finished compiling fsubs
+Completed call to gfcompile.bat
+Starting nonmem execution ...
+License Registered to: Mango Business Solutions Ltd
+Expiration Date:    14 OCT 2015
+Current Date:        3 FEB 2015
+Days until program expires : 251
+
+
+ Stochastic Approximation Expectation-Maximization (No Prior)
+ MONITORING OF SEARCH:
+
+ Stochastic/Burn-in Mode
+ iteration        -4000  SAEMOBJ=   2172.4323897462391
+ iteration        -3950  SAEMOBJ=  -404.68869916559305
+ iteration        -3900  SAEMOBJ=  -381.24012294836257
+ iteration        -3850  SAEMOBJ=  -408.35532202828887
+ iteration        -3800  SAEMOBJ=  -411.10542856362338
+ iteration        -3750  SAEMOBJ=  -408.58593773923474
+ iteration        -3700  SAEMOBJ=  -419.80365987261547
+ iteration        -3650  SAEMOBJ=  -406.44620642323332
+ iteration        -3600  SAEMOBJ=  -419.58204488245030
+ iteration        -3550  SAEMOBJ=  -419.71219522477389
+ iteration        -3500  SAEMOBJ=  -416.34870128578382
+ iteration        -3450  SAEMOBJ=  -434.37140636094477
+ iteration        -3400  SAEMOBJ=  -406.28794328942274
+ Convergence achieved: ending mode
+ Reduced Stochastic/Accumulation Mode
+ iteration            0  SAEMOBJ=  -399.23544975750787
+ iteration           50  SAEMOBJ=  -439.22614080807659
+ iteration          100  SAEMOBJ=  -434.09084161993201
+ iteration          150  SAEMOBJ=  -431.31083443098748
+ iteration          200  SAEMOBJ=  -430.55058206291352
+ iteration          250  SAEMOBJ=  -429.47386211285959
+ iteration          300  SAEMOBJ=  -428.86404964967005
+ iteration          350  SAEMOBJ=  -429.03004187454553
+ iteration          400  SAEMOBJ=  -428.95879035699664
+ iteration          450  SAEMOBJ=  -429.16895692791218
+ iteration          500  SAEMOBJ=  -429.70910715742849
+ iteration          550  SAEMOBJ=  -430.50951830827086
+ iteration          600  SAEMOBJ=  -431.21037141853787
+ iteration          650  SAEMOBJ=  -432.19100825789468
+ iteration          700  SAEMOBJ=  -433.43260046207865
+ iteration          750  SAEMOBJ=  -434.75491507647899
+ iteration          800  SAEMOBJ=  -436.27272653649567
+ iteration          850  SAEMOBJ=  -438.36758413149960
+ iteration          900  SAEMOBJ=  -440.53067679313244
+ iteration          950  SAEMOBJ=  -444.31494407510343
+ iteration         1000  SAEMOBJ=  -462.89197874404806
+ Elapsed estimation time in seconds:   493.48
+ STOCHASTIC PORTION COMPLETED
+ REDUCED STOCHASTIC PORTION COMPLETED
+
+F:1 .. 
+execute done
+
+Warning:
+ Found STANDARD/CORRELATION/CHOLESKY in control stream.
+This is not yet supported by PsN. Errors will be introduced when
+updating initial estimates to final estimates from previous run
+and sumo output will be wrong.
+
+Warning:
+ Found STANDARD/CORRELATION/CHOLESKY in control stream.
+This is not yet supported by PsN. Errors will be introduced when
+updating initial estimates to final estimates from previous run
+and sumo output will be wrong.

@@ -1,0 +1,6 @@
+SSE run info
+"","          Date","   samples run","simulation model","   PsN version","NONMEM version","Sim. with uncertainty",
+"",     2015-1-26,            20,Warfarin-ODE-latest.ctl,        v4.3.1,       default,            no,
+Reference/True values
+"","           ofv","        THETA1","        THETA2","        THETA3","        THETA4","        THETA5","        THETA6","        THETA7","        THETA8","    OMEGA(1,1)","    OMEGA(2,1)","    OMEGA(2,2)","    OMEGA(3,3)","    OMEGA(4,4)","    SIGMA(1,1)",
+"",Alt. model 1 result,           0.1,             8,         0.362,             1,           0.1,           0.1,          0.75,             1,           0.1,          0.01,           0.1,           0.1,           0.1,             1,

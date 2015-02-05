@@ -1,0 +1,9 @@
+Resampling from
+C:\Users\MROGAL~1\AppData\Local\Temp\mifshare\c37affd8-891f-4ff8-a0db-6081f
+a2027e2/warfarin_conc.csv
+|........................................| ... done
+Starting 20 NONMEM executions. 5 in parallel.
+S:1 .. S:3 .. S:5 .. S:7 .. S:9 .. S:11 .. S:13 .. S:15 .. S:17 .. S:19 .. S:20 .. Waiting for all NONMEM runs to finish:
+F:19 .. F:20 ..  done
+
+Bootstrap done.

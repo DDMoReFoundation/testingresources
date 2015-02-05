@@ -1,0 +1,12 @@
+Invoking converter toolbox command : C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\fis\..\converter-toolbox-distribution\converter-toolbox\convert.bat C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\MDL_IDE\workspace\Product1\Warfarin_ODE\Base\Warfarin-ODE-latest.mdl C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\MDL_IDE\workspace\Product1\Warfarin_ODE\Base MDL 6.0.7 JSON 6.0.7
+
+Using Java from SEE
+2015-01-27 15:45:51,735 0    [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2nonmem.MDLToNonmemConverter from:[MDL 5.0.8] to:[NMTRAN 7.2.0]
+2015-01-27 15:45:51,737 2    [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2pharmml.MDLToPharmMLConverter from:[MDL 6.0.7] to:[PharmML 0.3.1]
+2015-01-27 15:45:52,033 298  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2json.MDLToJSONConverter from:[MDL 6.0.7] to:[JSON 6.0.7]
+2015-01-27 15:45:52,039 304  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.mdl2json.JSONToMDLConverter from:[JSON 6.0.7] to:[MDL 6.0.7]
+2015-01-27 15:45:52,092 357  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converters.nonmem.ConverterProvider from:[PharmML 0.3.1] to:[NMTRAN 7.2.0]
+2015-01-27 15:45:52,381 646  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Found Provider: eu.ddmore.converter.lixoft.pharmml2mlxproject.PharmMLToMonolixProjectConverter from:[PharmML 0.3.1] to:[MonolixProject 4.3.2]
+2015-01-27 15:45:52,408 673  [main] INFO  eu.ddmore.convertertoolbox.conversion.ConverterManagerImpl  - Valid converter found: ConverterImpl [provider=MDLTOJSONConverter [source=MDL 6.0.7, target=JSON 6.0.7, converterVersion=1.0.5]]
+2015-01-27 15:45:54,906 3171 [main] INFO  eu.ddmore.convertertoolbox.cli.Main  - ConversionReportImpl [returnCode=SUCCESS, details=[]]
+ConversionReportImpl [returnCode=SUCCESS, details=[]]

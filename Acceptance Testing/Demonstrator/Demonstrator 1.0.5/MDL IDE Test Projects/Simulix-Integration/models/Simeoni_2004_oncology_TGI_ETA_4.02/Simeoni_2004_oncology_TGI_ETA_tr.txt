@@ -1,0 +1,43 @@
+
+
+[INDIVIDUAL]
+input={POP_LAMBDA0,OMEGA_LAMBDA0}
+
+EQUATION:
+
+K10 = (0.868)*(24)
+
+K12 = (0.006)*(24)
+
+K21 = (0.0838)*(24)
+
+;0.81
+
+;20
+
+
+DEFINITION:
+LAMBDA0 = { distribution = normal, transformation = log, reference = POP_LAMBDA0, var={OMEGA_LAMBDA0}}
+
+[LONGITUDINAL]
+input={LAMBDA0,LAMBDA1,CV,PSI,K10,K12,V1,K1,K2,K21,W0}
+
+EQUATION:
+C = (Q1)/(V1)
+WTOT = (((X1)+(X2))+(X3))+(X4)
+Q1_0 = 0
+Q2_0 = 0
+X1_0 = W0
+X2_0 = 0
+X3_0 = 0
+X4_0 = 0
+ddt_Q1 = ((K21)*(Q2))-(((K10)+(K12))*(Q1))
+ddt_Q2 = ((K12)*(Q1))-((K21)*(Q2))
+ddt_X1 = (((LAMBDA0)*(X1))/(((1)+((((WTOT)*(LAMBDA0))/(LAMBDA1))^(PSI)))^((1)/(PSI))))-(((K2)*(C))*(X1))
+ddt_X2 = (((K2)*(C))*(X1))-((K1)*(X2))
+ddt_X3 = ((K1)*(X2))-((K1)*(X3))
+ddt_X4 = ((K1)*(X3))-((K1)*(X4))
+
+DEFINITION:
+Y = { distribution = normal, prediction = WTOT,  errorModel=proportional(CV)}
+
