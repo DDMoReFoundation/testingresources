@@ -12,10 +12,11 @@ if(!exists("mdlEditorHome") || is.null(mdlEditorHome)) {
 	mdlEditorHome=getwd()
 }
 setwd(mdlEditorHome)
-projectLoc="workspace/Simulix-Integration"
-setwd(projectLoc)
-source("utils/utils.R")
-projectLoc=getwd()
+projectPath=.prependWithWorkspaceIfNeeded("Simulix-Integration")
+modelsDir="models/"
+setwd(projectPath)
+source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
+projectPath=getwd()
 
 #
 # Test Models
@@ -133,8 +134,8 @@ convertToPharmMLAndCopy <- function(model.mdl = NULL) {
 # Converting models to PharmML
 #
 models.latest = lapply(models.latest, function(x) {
-			setwd(projectLoc)
-			setwd(x[["wd"]])
+			setwd(projectPath)
+			setwd(paste0(modelsDir,x[["wd"]]))
 			x[["model.pharmml"]] = convertToPharmMLAndCopy(x[["model.mdl"]])
 			x
 		});
@@ -144,8 +145,8 @@ models.latest = lapply(models.latest, function(x) {
 #
 models.latest.simulix = lapply(models.latest, function(model) {
 			if(!is.null(model[["simulix.call"]])) {
-				setwd(projectLoc)
-				setwd(model[["wd"]])
+				setwd(projectPath)
+				setwd(paste0(modelsDir,model[["wd"]]))
 				model.pharmml = basename(model[["model.pharmml"]])
 				print(paste("Running simmulix for", model[["model.mdl"]], "with pharmml", model.pharmml))
 				model[["simulix.call"]](model.pharmml);

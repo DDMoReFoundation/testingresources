@@ -7,17 +7,17 @@
 if(!exists("mdlEditorHome")||is.null(mdlEditorHome)) {
 	mdlEditorHome= getwd();
 }
-projectPath="workspace/PsN-Integration/Warfarin-ODE";
+projectPath=.prependWithWorkspaceIfNeeded("PsN-Integration");
 setwd(mdlEditorHome)
 setwd(projectPath)
-source("../utils/utils.R")
+source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
 projectPath = getwd();
 
 #' Reading in the Model
 #' =========================
 setwd(mdlEditorHome)
 setwd(projectPath)
-mdlfile="Warfarin-ODE-latest.mdl"
+mdlfile="models/Warfarin-ODE-latest.mdl"
 myDataObj <- getDataObjects(mdlfile)[[1]]
 myParObj <- getParameterObjects(mdlfile)[[1]]
 myModObj <- getModelObjects(mdlfile)[[1]]
