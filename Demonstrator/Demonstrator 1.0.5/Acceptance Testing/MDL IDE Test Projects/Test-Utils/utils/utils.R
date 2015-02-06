@@ -32,3 +32,8 @@ printMessage <- function(message) {
 	}
 	directory
 }
+
+#' Generates a result directory name
+.resultDir <- function(basename) {
+	paste0(basename,"_",format(Sys.time(),"%H%M%S"),".out")
+}

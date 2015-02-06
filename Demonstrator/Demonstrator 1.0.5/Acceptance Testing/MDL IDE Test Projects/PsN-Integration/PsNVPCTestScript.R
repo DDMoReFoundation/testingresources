@@ -45,7 +45,7 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 printMessage("Running Estimation (this can take about 5 minutes)")
 setwd(mdlEditorHome)
 setwd(projectPath)
-baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder="PsNVPCTestScript-BaseModel")
+baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNVPCTestScript-BaseModel"))
 
 #' Populating the Parameter object with final estimates
 myParObjUpdated=update.warfarin.params.with.final.estimates(parObj, bootSO)
@@ -57,7 +57,7 @@ myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, md
 printMessage("Running VPC (this can take about 5 minutes)")
 setwd(mdlEditorHome)
 setwd(projectPath)
-vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder="PsNVPCTestScript-VPC")
+vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir("PsNVPCTestScript-VPC"))
 
 
 printMessage("Check if graph was produced")

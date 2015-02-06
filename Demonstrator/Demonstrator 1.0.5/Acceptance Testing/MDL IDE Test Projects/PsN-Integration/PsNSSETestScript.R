@@ -16,12 +16,12 @@ projectPath = getwd();
 printMessage("Running Estimation (this can take about 5 minutes)")
 setwd(mdlEditorHome)
 setwd(projectPath)
-baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder="PsNSSETestScript-BaseModel")
+baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNSSETestScript-BaseModel"))
 
 
 printMessage("Running SSE (this can take about 3 minutes)")
 setwd(mdlEditorHome)
 setwd(projectPath)
-sseSO <- SSE.PsN("models/Warfarin-ODE-latest.mdl",samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder="PsNSSETestScript-SSE")
+sseSO <- SSE.PsN("models/Warfarin-ODE-latest.mdl",samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir("PsNSSETestScript-SSE"))
 
 printMessage("DONE")

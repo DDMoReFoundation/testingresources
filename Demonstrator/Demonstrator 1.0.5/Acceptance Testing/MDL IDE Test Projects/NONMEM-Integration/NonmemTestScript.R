@@ -29,7 +29,7 @@ models.SO = lapply(models, function(modelFile) {
 				modelFile = paste(modelsDir,modelFile, sep="/");
 				printMessage(paste("Running NONMEM with ", modelFile))
 				names(model)
-				so <- estimate(modelFile, target="NONMEM", subfolder="NONMEM");
+				so <- estimate(modelFile, target="NONMEM", subfolder=.resultDir("NONMEM"));
 				
 				printMessage("Please, verify that the execution did not fail")
 				readline("Press <return to continue") 

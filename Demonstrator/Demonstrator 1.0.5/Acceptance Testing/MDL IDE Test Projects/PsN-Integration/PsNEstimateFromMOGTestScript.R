@@ -28,6 +28,6 @@ dynamicMog=createMogObj(myDataObj, myParObj, myModObj, myTaskObj, "warfarin_from
 printMessage("Running Estimation (this can take about 5 minutes)")
 setwd(mdlEditorHome)
 setwd(projectPath)
-baseSO <- estimate(dynamicMog, target="PsN", subfolder="PsNEstimateFromMOGTestScript-BaseModel")
+baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir("PsNEstimateFromMOGTestScript-BaseModel"))
 
 printMessage("DONE")
