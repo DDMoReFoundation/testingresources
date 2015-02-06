@@ -1,5 +1,0 @@
-
-
-Error code 1 returned from converter toolbox command : C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\fis\..\converter-toolbox-distribution\converter-toolbox\convert.bat C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\MDL_IDE\workspace\Product1\output.json C:\mats_working_files\standalone-execution-environment-with-all-1.0.5-SNAPSHOT-binary-64bit\MDL_IDE\workspace\Product1 JSON 6.0.7 MDL 6.0.7
-
-ExecuteException cause: Process exited with an error: 1 (Exit value: 1)
