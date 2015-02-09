@@ -5,14 +5,14 @@
 library('mlxR')
 library('ggplot2')
 
-if(!exists(".MDL_WORKSPACE_PATH") || is.null(.MDL_WORKSPACE_PATH)) {
-	stop(".MDL_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
+if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
+	stop(".MDLIDE_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
 }
-source(file.path(.MDL_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
+source(file.path(.MDLIDE_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 
 projectPath="NONMEM-Integration"
 modelsDir="models/"
-setwd(.MDL_WORKSPACE_PATH)
+setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath=getwd()
 
