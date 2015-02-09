@@ -25,8 +25,8 @@ printMessage <- function(message) {
 #'
 #' Prepends the directory name with 'workspace/' if the parent is named 'workspace'
 #' this is a naive way of detecting if the tests are run in MDL IDE from SEE or in dev environment
-.prependWithWorkspaceIfNeeded <- function(directory) {
-	name = basename(getwd())
+.prependWithWorkspaceIfNeeded <- function(mdlEditorHome, directory) {
+	name = basename(mdlEditorHome)
 	if (name=="workspace"){
 		return(paste("workspace",directory,sep='/'))
 	}

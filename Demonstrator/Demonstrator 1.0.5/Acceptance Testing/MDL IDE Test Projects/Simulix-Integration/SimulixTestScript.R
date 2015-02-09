@@ -11,11 +11,12 @@ library('ggplot2')
 if(!exists("mdlEditorHome") || is.null(mdlEditorHome)) {
 	mdlEditorHome=getwd()
 }
-setwd(mdlEditorHome)
-projectPath=.prependWithWorkspaceIfNeeded("Simulix-Integration")
-modelsDir="models/"
-setwd(projectPath)
 source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
+
+projectPath=.prependWithWorkspaceIfNeeded(mdlEditorHome,"Simulix-Integration")
+modelsDir="models/"
+setwd(mdlEditorHome)
+setwd(projectPath)
 projectPath=getwd()
 
 #
