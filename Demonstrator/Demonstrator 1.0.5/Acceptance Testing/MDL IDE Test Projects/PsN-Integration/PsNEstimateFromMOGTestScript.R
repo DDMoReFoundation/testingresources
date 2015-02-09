@@ -4,19 +4,19 @@
 
 #' Initialisation
 #' =========================
-if(!exists("mdlEditorHome")||is.null(mdlEditorHome)) {
-	mdlEditorHome= getwd();
+if(!exists(".MDL_WORKSPACE_PATH") || is.null(.MDL_WORKSPACE_PATH)) {
+	stop(".MDL_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
 }
-source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
+source(file.path(.MDL_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 
 projectPath="PsN-Integration"
-setwd(mdlEditorHome)
+setwd(.MDL_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
 #' Reading in the Model
 #' =========================
-setwd(mdlEditorHome)
+setwd(.MDL_WORKSPACE_PATH)
 setwd(projectPath)
 mdlfile="models/Warfarin-ODE-latest.mdl"
 myDataObj <- getDataObjects(mdlfile)[[1]]
@@ -27,7 +27,7 @@ dynamicMog=createMogObj(myDataObj, myParObj, myModObj, myTaskObj, "warfarin_from
 
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-setwd(mdlEditorHome)
+setwd(.MDL_WORKSPACE_PATH)
 setwd(projectPath)
 baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir("PsNEstimateFromMOGTestScript-BaseModel"))
 

@@ -7,10 +7,11 @@
 
 #' Initialisation
 #' =========================
-if(!exists("mdlEditorHome")||is.null(mdlEditorHome)) {
-	mdlEditorHome= getwd();
+if(!exists(".MDL_WORKSPACE_PATH") || is.null(.MDL_WORKSPACE_PATH)) {
+	stop(".MDL_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
 }
-projectPath="workspace/PsN-Integration/PsN-Warfarin";
+source(file.path(.MDL_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
+projectPath="Sandbox";
 setwd(mdlEditorHome)
 setwd(projectPath)
 projectPath = getwd();
