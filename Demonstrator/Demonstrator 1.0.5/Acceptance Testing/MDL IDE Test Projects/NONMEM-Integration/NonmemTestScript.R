@@ -10,7 +10,7 @@ if(!exists("mdlEditorHome") || is.null(mdlEditorHome)) {
 }
 source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
 
-projectPath=.prependWithWorkspaceIfNeeded(mdlEditorHome,"NONMEM-Integration")
+projectPath="NONMEM-Integration"
 modelsDir="models/"
 setwd(mdlEditorHome)
 setwd(projectPath)

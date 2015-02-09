@@ -8,7 +8,7 @@ if(!exists("mdlEditorHome")||is.null(mdlEditorHome)) {
 }
 source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
 
-projectPath=.prependWithWorkspaceIfNeeded(mdlEditorHome,"Monolix-Integration")
+projectPath="Monolix-Integration"
 setwd(mdlEditorHome)
 setwd(projectPath)
 projectPath = getwd();

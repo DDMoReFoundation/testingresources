@@ -13,7 +13,7 @@ if(!exists("mdlEditorHome") || is.null(mdlEditorHome)) {
 }
 source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
 
-projectPath=.prependWithWorkspaceIfNeeded(mdlEditorHome,"Simulix-Integration")
+projectPath="Simulix-Integration"
 modelsDir="models/"
 setwd(mdlEditorHome)
 setwd(projectPath)

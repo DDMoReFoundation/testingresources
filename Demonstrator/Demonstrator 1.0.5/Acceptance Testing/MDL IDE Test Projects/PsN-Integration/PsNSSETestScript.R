@@ -9,7 +9,7 @@ if(!exists("mdlEditorHome")||is.null(mdlEditorHome)) {
 }
 source(file.path(mdlEditorHome,"Test-Utils/utils/utils.R"));
 
-projectPath=.prependWithWorkspaceIfNeeded(mdlEditorHome,"PsN-Integration");
+projectPath="PsN-Integration"
 setwd(mdlEditorHome)
 setwd(projectPath)
 projectPath = getwd();
