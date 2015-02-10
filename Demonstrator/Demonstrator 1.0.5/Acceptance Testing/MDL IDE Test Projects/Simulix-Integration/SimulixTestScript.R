@@ -14,16 +14,42 @@ if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
 source(file.path(.MDLIDE_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 
 projectPath="Simulix-Integration"
-modelsDir="models/"
+modelsDir="models"
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath=getwd()
 
+HEADLESS=FALSE;
+
 #
 # Test Models
 #
-models.latest <- list(
-		list(wd="DelBene_2009_oncology_in_vitro_ETA_4.02", model.mdl='DelBene_2009_oncology_in_vitro_ETA.mdl'
+models <- list(
+
+		list(wd="Claret_2009_oncology_capecitabine_TGI", model.mdl='Claret_2009_oncology_capecitabine_TGI.mdl'
+				, simulix.call = function(model.pharmml) {
+						d = read.csv('claret_simuldata.csv',na='.')
+						p <- c(POP_TS0=0,
+							  OMEGA_KD=1,
+							  OMEGA_KE=1,
+							  POP_LAMBDA=1,
+							  OMEGA_LAMBDA=1,
+							  OMEGA_TS0=1,
+							  POP_KD=1,
+							  POP_KE=1,
+							  OMEGA_KL=1,
+							  POP_KL=1,
+							  AERR=1,
+							  PERR=1)
+
+						out  <- list( name = c('Y'), time = seq(0,30,by=0.5))
+						res <- simulx( model     = model.pharmml,
+									   parameter = p,
+									   output = out) 
+
+						print(ggplot() + geom_line(data=res$Y, aes(x=time, y=Y)))
+				}),
+		list(wd="DelBene_2009_oncology_in_vitro_ETA", model.mdl='DelBene_2009_oncology_in_vitro_ETA.mdl'
 				, simulix.call = function(model.pharmml) {
 					d = read.csv('delbene2009_data.csv',skip=1,na='.')
 					head(d)
@@ -45,7 +71,7 @@ models.latest <- list(
 					print(ggplot() + geom_line(data=res$NT, aes(x=time, y=NT, colour=id)) + 
 									geom_point(data=res$Y, aes(x=time, y=Y,colour=id)))
 				}),
-		list(wd="Rocchetti_2013_oncology_TGI_antiangiogenic_combo_ETA_4.02", model.mdl='Rocchetti_2013_oncology_TGI_antiangiogenic_combo_ETA.mdl'
+		list(wd="Rocchetti_2013_oncology_TGI_antiangiogenic_combo_ETA", model.mdl='Rocchetti_2013_oncology_TGI_antiangiogenic_combo_ETA.mdl'
 				, simulix.call = function(model.pharmml) {
 					d = read.csv('rocchetti2013_data.csv',skip=1,na='.')
 					head(d)
@@ -74,7 +100,7 @@ models.latest <- list(
 					print(ggplot() + geom_line(data=res$WTOT, aes(x=time, y=WTOT), colour="black") + 
 									geom_point(data=res$Y, aes(x=time, y=Y), colour="red"))
 				}),
-		list(wd="Simeoni_2004_oncology_TGI_ETA_4.02", model.mdl='Simeoni_2004_oncology_TGI_ETA.mdl'
+		list(wd="Simeoni_2004_oncology_TGI_ETA", model.mdl='Simeoni_2004_oncology_TGI_ETA.mdl'
 				, simulix.call = function(model.pharmml) {
 					d = read.csv('simeoni2004_data.csv',skip=1,na='.')
 					head(d)
@@ -103,6 +129,55 @@ models.latest <- list(
 					
 					print(ggplot() + geom_line(data=res$WTOT, aes(x=time, y=WTOT, colour=id)) + 
 									geom_point(data=res$Y, aes(x=time, y=Y,colour=id)))
+				}),
+				
+		list(wd="Warfarin_ODE", model.mdl='Warfarin-ODE-latest.mdl'
+				, simulix.call = function(model.pharmml) {
+						d = read.csv('warfarin_conc.csv',na='.')
+						p <- c(PPV_CL=1,
+							   POP_V=1,
+							   POP_KA=1,
+							   POP_CL=1,
+							   BETA_V_WT=1,
+							   PPV_TLAG=1,
+							   PPV_V=1,
+							   POP_TLAG=1,
+							   logtWT=1,
+							   BETA_CL_WT=1,
+							   PPV_KA=1,
+							   RUV_PROP=1,
+							   RUV_ADD=1)
+
+						out  <- list( name = c('Y'), time = seq(0,30,by=0.5))
+						res <- simulx( model     = model.pharmml,
+									   parameter = p,
+									   output = out) 
+
+						print(ggplot() + geom_line(data=res$Y, aes(x=time, y=Y)))
+				}),
+		
+		list(wd="Nock_2013_Carboplatin_PK_MONOLIX", model.mdl='Nock_2013_Carboplatin_PK_MONOLIX.mdl'
+				, simulix.call = function(model.pharmml) {
+					d = read.csv('Carbo_DDMoRe_log2.csv',na='.')
+					p <- c(CLCLCR_COV=1,
+							THV1=1,
+							THV2=1,
+							OMCL=1,
+							THQ=1,
+							logtCLCR=1,
+							OMV1=1,
+							logtKG=0.7,
+							THCL=1,
+							V1KG_COV=1,
+							SDPROP=1,
+							SDADD=1)
+					
+					out  <- list( name = c('Y'), time = seq(0,30,by=0.5))
+					res <- simulx( model     = model.pharmml,
+							parameter = p,
+							output = out) 
+					
+					print(ggplot() + geom_line(data=res$Y, aes(x=time, y=Y)))
 				})
 )
 
@@ -123,7 +198,7 @@ convertToPharmMLAndCopy <- function(model.mdl = NULL) {
 	}
 	
 	file.copy(model.pharmml, getwd(), overwrite=TRUE);
-	model.pharmml
+	basename(model.pharmml)
 }
 
 ##
@@ -134,26 +209,34 @@ convertToPharmMLAndCopy <- function(model.mdl = NULL) {
 #
 # Converting models to PharmML
 #
-models.latest = lapply(models.latest, function(x) {
-			setwd(projectPath)
-			setwd(paste0(modelsDir,x[["wd"]]))
+models.converted = lapply(models, function(x) {
+			modelWd=file.path(projectPath,modelsDir,x[["wd"]] )
+			setwd(modelWd)
+			if(!file.exists(x[["model.mdl"]])) {
+				stop(paste("File ",file.path(modelWd,x[["model.mdl"]]), "does not exist! Please verify that the test data are correct."))
+			}
 			x[["model.pharmml"]] = convertToPharmMLAndCopy(x[["model.mdl"]])
+			if(!HEADLESS) {
+				printMessage(paste("Please, verify that the PharmML file exists:",x[["model.pharmml"]], "\n (You might need refresh the project (select the project in 'Project Explorer' and hit F5-key))."))
+				readline("Press <return to continue") 
+			}
 			x
 		});
 
 #
 # Executing Simulix
 #
-models.latest.simulix = lapply(models.latest, function(model) {
+models.simulix = lapply(models.converted, function(model) {
 			if(!is.null(model[["simulix.call"]])) {
-				setwd(projectPath)
-				setwd(paste0(modelsDir,model[["wd"]]))
-				model.pharmml = basename(model[["model.pharmml"]])
+				modelWd=file.path(projectPath,modelsDir,model[["wd"]] )
+				setwd(modelWd)
+				model.pharmml = model[["model.pharmml"]]
 				print(paste("Running simmulix for", model[["model.mdl"]], "with pharmml", model.pharmml))
 				model[["simulix.call"]](model.pharmml);
-				
-				printMessage("Please, verify that Graph was produced")
-				readline("Press <return to continue") 
+				if(!HEADLESS) {
+					printMessage("Please, verify that Graph was produced")
+					readline("Press <return to continue") 
+				}
 			}
 		});
 
