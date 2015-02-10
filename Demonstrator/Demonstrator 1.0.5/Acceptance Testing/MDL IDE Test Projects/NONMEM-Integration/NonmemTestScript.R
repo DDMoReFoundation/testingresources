@@ -38,14 +38,12 @@ models.SO = lapply(models, function(modelFile) {
 				model
 		});
 
-
-#
 #
 # Check for errors
 lapply(models.SO, function(modelWithSO) {
 			so = modelWithSO[["so"]]
 			if(length(so@TaskInformation$Messages$Errors)>0) {
-				printMessage(paste("There were errors when executing model",modelFile))
+				printMessage(paste("There were errors when executing model",modelWithSO[["modelFile"]]))
 				print(so@TaskInformation$Messages$Errors)
 				return(FALSE)
 			}

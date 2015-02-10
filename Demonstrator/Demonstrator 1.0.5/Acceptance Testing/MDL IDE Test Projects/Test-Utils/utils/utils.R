@@ -2,7 +2,7 @@
 # Global settings
 #
 #' Should user NOT be propted to check outputs?
-HEADLESS=TRUE;
+HEADLESS=FALSE;
 
 
 #'

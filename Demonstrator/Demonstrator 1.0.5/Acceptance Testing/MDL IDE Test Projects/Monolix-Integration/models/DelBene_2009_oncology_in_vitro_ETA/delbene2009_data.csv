@@ -1,4 +1,3 @@
-Records with TIME=0 do not correspond to experimental data but they were added to indicate the initial integration times and conditions for the odes,,,,
 ID,TIME,DV,CONC,EVID
 1,0,.,0,2
 1,4,2330.56,0,0
