@@ -36,8 +36,8 @@ Hansson2013_par = parobj{
       POP_MRT3:{value=401, lo=0, units="h"} 
 
       #Residual Error
-      POP_RES_sVEGFR3_ADD:{value=0.22, lo=0, units="pg/mL"} 
-      POP_RES_sVEGFR3_PROP:{value=0, fix=true}	  
+      POP_RES_sVEGFR3_ADD:{value=0, fix=true} 
+      POP_RES_sVEGFR3_PROP:{value=0.22, lo=0}    
    }
 
    VARIABILITY{
@@ -59,7 +59,7 @@ Hansson2013_mdl = mdlobj{
       DAYS:{type=continuous,units="DAYS"}
       DVX:{type=continuous, units="mg/L"} 
       DV:{type=continuous,units="mg/L",use=dv, prediction=sVEGFR3_obs, level=1}
-      DOS:{type=continuous,units="mg", use=amt}
+      DOS:{type=continuous,units="mg"}
       CL:{type=continuous,units="L/h", use=covariate}
       EVID:{type=categorical, use=evid}
    }# end MODEL_INPUT_VARIABLES
@@ -71,8 +71,8 @@ Hansson2013_mdl = mdlobj{
       POP_MRT3 
 
       #Residual Error
-      POP_RES_sVEGFR3_ADD
-      POP_RES_sVEGFR3_PROP  	  
+      POP_RES_sVEGFR3_ADD        
+      POP_RES_sVEGFR3_PROP        
    }# end STRUCTURAL_PARAMETERS
 
    VARIABILITY_PARAMETERS{
@@ -116,8 +116,8 @@ Hansson2013_mdl = mdlobj{
    OBSERVATION{
       eps_RES_W ~ {type=normal, mean=0, var=SIGMA_RES_W, level=DV}
                       
-      sVEGFR3_obs : {type=continuous, error=combinedError3(additive=POP_RES_sVEGFR3_ADD, proportional=POP_RES_sVEGFR3_PROP,f=sVEGFR3),
-       prediction=sVEGFR3, eps=eps_RES_W}
+ 	  sVEGFR3_obs : {type=continuous, error=combinedError2log(additive=POP_RES_sVEGFR3_ADD, proportional=POP_RES_sVEGFR3_PROP, f=sVEGFR3), prediction=sVEGFR3, eps=eps_RES_W}
+ 	  
  	  
   	  }# end OBSERVATION
 
@@ -130,7 +130,7 @@ Hansson2013_task = taskobj{
     ESTIMATE { 
     	target=NMTRAN_CODE 
         cov=true
-        algo= ["FOCE"] 
+        algo= ["FOCEI"] 
 	}
 }# end of task object
 
