@@ -19,8 +19,6 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath=getwd()
 
-HEADLESS=FALSE;
-
 #
 # Test Models
 #

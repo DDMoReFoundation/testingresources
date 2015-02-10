@@ -19,13 +19,13 @@ projectPath = getwd();
 printMessage("Running Estimation (this can take about 5 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
-baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNBootstrapTestScript-BaseModel"))
+baseSO <- estimate("models/Warfarin-ODE/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNBootstrapTestScript-BaseModel"))
 
 
 printMessage("Running Bootstrap (this can take about 40 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
-bootSO <- bootstrap.PsN("models/Warfarin-ODE-latest.mdl",samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir("PsNBootstrapTestScript-Bootstrap"))
+bootSO <- bootstrap.PsN("models/Warfarin-ODE/Warfarin-ODE-latest.mdl",samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir("PsNBootstrapTestScript-Bootstrap"))
 
 
 printMessage("DONE")

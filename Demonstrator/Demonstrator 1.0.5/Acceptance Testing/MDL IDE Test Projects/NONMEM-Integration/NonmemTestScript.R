@@ -29,13 +29,27 @@ models.SO = lapply(models, function(modelFile) {
 				setwd(projectPath)
 				modelFile = paste(modelsDir,modelFile, sep="/");
 				printMessage(paste("Running NONMEM with ", modelFile))
-				names(model)
 				so <- estimate(modelFile, target="NONMEM", subfolder=.resultDir("NONMEM"));
-				
-				printMessage("Please, verify that the execution did not fail")
-				readline("Press <return to continue") 
-				so
+				if(!HEADLESS) {
+					printMessage("Please, verify that the execution did not fail")
+					readline("Press <return to continue") 
+				}
+				model <- list("modelFile" = modelFile, "so" = so)
+				model
 		});
 
+
+#
+#
+# Check for errors
+lapply(models.SO, function(modelWithSO) {
+			so = modelWithSO[["so"]]
+			if(length(so@TaskInformation$Messages$Errors)>0) {
+				printMessage(paste("There were errors when executing model",modelFile))
+				print(so@TaskInformation$Messages$Errors)
+				return(FALSE)
+			}
+			return(TRUE)
+		})
 
 printMessage("DONE")

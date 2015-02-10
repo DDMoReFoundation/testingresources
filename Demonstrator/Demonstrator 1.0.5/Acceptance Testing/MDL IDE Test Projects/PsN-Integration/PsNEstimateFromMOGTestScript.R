@@ -18,7 +18,7 @@ projectPath = getwd();
 #' =========================
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
-mdlfile="models/Warfarin-ODE-latest.mdl"
+mdlfile="models/Warfarin-ODE/Warfarin-ODE-latest.mdl"
 myDataObj <- getDataObjects(mdlfile)[[1]]
 myParObj <- getParameterObjects(mdlfile)[[1]]
 myModObj <- getModelObjects(mdlfile)[[1]]

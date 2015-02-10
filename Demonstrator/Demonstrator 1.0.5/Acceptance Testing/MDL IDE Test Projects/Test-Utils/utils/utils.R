@@ -1,4 +1,12 @@
+#
+# Global settings
+#
+#' Should user NOT be propted to check outputs?
+HEADLESS=TRUE;
 
+
+#'
+#' Prints a formatted message
 printMessage <- function(message) {
 	print(paste(replicate(60, "#"), collapse = ""))
 	print(message)

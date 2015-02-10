@@ -64,6 +64,14 @@ myData <- read(myDataObj)
 #' Let's look at the first 6 lines of the data set
 head(myData)
 
-so <- estimate(mdlfile, target="NONMEM", subfolder=.resultDir("NONMEM"));
+printMessage("Estimating with Nonmem")
+soNonmem <- estimate(mdlfile, target="NONMEM", subfolder=.resultDir("NONMEM"));
+
+if(length(soNonmem@TaskInformation$Messages$Errors)>0) {
+	printMessage(paste("There were errors when executing model",mdlfile))
+	print(soNonmem@TaskInformation$Messages$Errors)
+	stop("Error, see console output for details")
+}
+
 
 printMessage("DONE")

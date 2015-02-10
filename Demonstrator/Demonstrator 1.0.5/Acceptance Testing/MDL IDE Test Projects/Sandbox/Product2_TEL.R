@@ -15,6 +15,7 @@ projectPath="Sandbox";
 setwd(mdlEditorHome)
 setwd(projectPath)
 projectPath = getwd();
+setwd("models")
 
 
 #' List files available in working directory

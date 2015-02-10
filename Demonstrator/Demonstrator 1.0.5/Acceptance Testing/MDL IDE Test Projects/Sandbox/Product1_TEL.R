@@ -9,11 +9,11 @@ if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
 }
 source(file.path(.MDLIDE_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 
-projectPath="workspace/PsN-Integration/PsN-Warfarin";
+projectPath="Sandbox";
 setwd(mdlEditorHome)
 setwd(projectPath)
-projectPath = getwd();
-
+projectPath = getwd()
+setwd("models")
 #' List files available in working directory
 list.files()
 

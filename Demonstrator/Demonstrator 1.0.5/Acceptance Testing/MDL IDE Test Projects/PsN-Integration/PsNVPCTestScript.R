@@ -18,7 +18,7 @@ projectPath = getwd();
 #' =========================
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
-mdlfile="models/Warfarin-ODE-latest.mdl"
+mdlfile="models/Warfarin-ODE/Warfarin-ODE-latest.mdl"
 myDataObj <- getDataObjects(mdlfile)[[1]]
 myParObj <- getParameterObjects(mdlfile)[[1]]
 myModObj <- getModelObjects(mdlfile)[[1]]
@@ -46,7 +46,7 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 printMessage("Running Estimation (this can take about 5 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
-baseSO <- estimate("models/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNVPCTestScript-BaseModel"))
+baseSO <- estimate("models/Warfarin-ODE/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNVPCTestScript-BaseModel"))
 
 #' Populating the Parameter object with final estimates
 myParObjUpdated=update.warfarin.params.with.final.estimates(parObj, bootSO)
