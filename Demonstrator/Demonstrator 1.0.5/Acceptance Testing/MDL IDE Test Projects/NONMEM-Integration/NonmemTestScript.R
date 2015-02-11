@@ -15,39 +15,23 @@ modelsDir="models/"
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath=getwd()
+models.SO = list()
+models.validated = list()
 
-#
-# Test Models
-#
+
+printMessage("Collecting list of models")
 models <- .getMDLFilesFromModelDirectory(modelsDir);
+printMessage(paste(models))
 
-##
-# Test Script
-##
+printMessage("Estimating models")
+models.SO <- estimateModelsWith(models, "NONMEM")
 
-models.SO = lapply(models, function(modelFile) {
-				setwd(projectPath)
-				modelFile = paste(modelsDir,modelFile, sep="/");
-				printMessage(paste("Running NONMEM with ", modelFile))
-				so <- estimate(modelFile, target="NONMEM", subfolder=.resultDir("NONMEM"));
-				if(!HEADLESS) {
-					printMessage("Please, verify that the execution did not fail")
-					readline("Press <return to continue") 
-				}
-				model <- list("modelFile" = modelFile, "so" = so)
-				model
-		});
 
-#
-# Check for errors
-lapply(models.SO, function(modelWithSO) {
-			so = modelWithSO[["so"]]
-			if(length(so@TaskInformation$Messages$Errors)>0) {
-				printMessage(paste("There were errors when executing model",modelWithSO[["modelFile"]]))
-				print(so@TaskInformation$Messages$Errors)
-				return(FALSE)
-			}
-			return(TRUE)
-		})
+printMessage("Validating results of estimation")
+models.validated <- validateExecutions(models.SO)
+
+printMessage("Creating Xpose databases")
+models.xposedbs <- createXposeDatabases(models.validated)
+
 
 printMessage("DONE")

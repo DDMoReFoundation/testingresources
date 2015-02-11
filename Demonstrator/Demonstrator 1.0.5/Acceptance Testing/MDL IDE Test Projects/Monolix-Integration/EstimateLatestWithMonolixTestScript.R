@@ -12,40 +12,22 @@ projectPath="Monolix-Integration"
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 modelsDir="models/"
-projectPath = getwd();
+projectPath = getwd()
+models.SO = list()
+models.validated = list()
+models.xposedbs = list()
 
+printMessage("Collecting list of models")
+models <- .getMDLFilesFromModelDirectory(modelsDir)
+printMessage(paste(models))
 
-#
-# Test Models
-#
-models <- .getMDLFilesFromModelDirectory(modelsDir);
+printMessage("Estimating models")
+models.SO <- estimateModelsWith(models, "MONOLIX")
 
-##
-# Test Script
-##
-models.SO = lapply(models, function(modelFile) {
-			setwd(projectPath)
-			modelFile = paste(modelsDir,modelFile, sep="/");
-			printMessage(paste("Running MONOLIX with ", modelFile))
-			so <- estimate(modelFile, target="MONOLIX", subfolder=.resultDir("MONOLIX"));
-			if(!HEADLESS) {
-				printMessage("Please, verify that the execution did not fail")
-				readline("Press <return to continue") 
-			}
-			model <- list("modelFile" = modelFile, "so" = so)
-			model
-		});
+printMessage("Validating results of estimation")
+models.validated <- validateExecutions(models.SO)
 
-#
-# Check for errors
-lapply(models.SO, function(modelWithSO) {
-			so = modelWithSO[["so"]]
-			if(length(so@TaskInformation$Messages$Errors)>0) {
-				printMessage(paste("There were errors when executing model",modelWithSO[["modelFile"]]))
-				print(so@TaskInformation$Messages$Errors)
-				return(FALSE)
-			}
-			return(TRUE)
-		})
+printMessage("Creating Xpose databases")
+models.xposedbs <- createXposeDatabases(models.validated)
 
 printMessage("DONE")
