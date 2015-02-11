@@ -14,13 +14,8 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
-#' Fit a base model
-#' -------------------------
 printMessage("Running Estimation (this can take about 5 minutes)")
-setwd(.MDLIDE_WORKSPACE_PATH)
-setwd(projectPath)
 baseSO <- estimate("models/Warfarin-ODE/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNBootstrapTestScript-BaseModel"))
-
 
 printMessage("Running Bootstrap (this can take about 40 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)

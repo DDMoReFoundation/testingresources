@@ -15,10 +15,7 @@ setwd(projectPath)
 projectPath = getwd();
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-setwd(.MDLIDE_WORKSPACE_PATH)
-setwd(projectPath)
 baseSO <- estimate("models/Warfarin-ODE/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNSSETestScript-BaseModel"))
-
 
 printMessage("Running SSE (this can take about 3 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)

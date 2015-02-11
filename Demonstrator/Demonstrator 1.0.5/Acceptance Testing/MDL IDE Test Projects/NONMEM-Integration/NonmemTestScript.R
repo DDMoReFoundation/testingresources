@@ -2,8 +2,8 @@
 #' =========================================================================================
 #' =========================================================================================
 
-library('mlxR')
-library('ggplot2')
+#' Initialisation
+#' =========================
 
 if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
 	stop(".MDLIDE_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")

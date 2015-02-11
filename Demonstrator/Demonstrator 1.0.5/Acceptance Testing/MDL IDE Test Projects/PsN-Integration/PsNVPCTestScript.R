@@ -14,8 +14,8 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
-#' Reading in the Model
-#' =========================
+
+printMessage("Reading in the Model")
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 mdlfile="models/Warfarin-ODE/Warfarin-ODE-latest.mdl"
@@ -48,12 +48,11 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 baseSO <- estimate("models/Warfarin-ODE/Warfarin-ODE-latest.mdl", target="PsN", subfolder=.resultDir("PsNVPCTestScript-BaseModel"))
 
-#' Populating the Parameter object with final estimates
+printMessage("Populating the Parameter object with final estimates")
 myParObjUpdated=update.warfarin.params.with.final.estimates(parObj, bootSO)
 
-#' Assembling the new MOG
+printMessage("Assembling the new mog")
 myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, mdlObj = myModObj, taskObj = myTaskObj, "Warfarin_ODE_latest_VPC")
-
 
 printMessage("Running VPC (this can take about 5 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)
@@ -61,5 +60,5 @@ setwd(projectPath)
 vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir("PsNVPCTestScript-VPC"))
 
 
-printMessage("Check if graph was produced")
+printMessage("Check if the graph was produced")
 printMessage("DONE")
