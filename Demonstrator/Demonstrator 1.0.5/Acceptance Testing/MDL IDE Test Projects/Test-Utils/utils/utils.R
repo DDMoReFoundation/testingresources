@@ -3,7 +3,7 @@
 #
 
 #' Should user NOT be propted to check outputs?
-HEADLESS=TRUE;
+HEADLESS=FALSE;
 
 
 ##########################################################################################
@@ -23,8 +23,9 @@ validateExecutions <- function(models.SO) {
 					printMessage(paste("There were errors when executing model",modelWithSO[["modelFile"]]))
 					print(so@TaskInformation$Messages$Errors)
 					modelWithSO[["valid"]] = FALSE
+				} else {
+					modelWithSO[["valid"]] = TRUE
 				}
-				modelWithSO[["valid"]] = TRUE
 				modelWithSO
 			})
 }
