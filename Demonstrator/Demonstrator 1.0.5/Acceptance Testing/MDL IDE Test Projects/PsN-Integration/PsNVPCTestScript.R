@@ -57,6 +57,7 @@ myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, md
 printMessage("Running VPC (this can take about 5 minutes)")
 setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
+setwd("models/Warfarin-ODE/")
 vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir("PsNVPCTestScript-VPC"))
 
 
