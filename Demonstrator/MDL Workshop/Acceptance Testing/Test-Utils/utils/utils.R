@@ -76,6 +76,26 @@ estimateModelsWith <- function(models, target) {
 			})
 }
 
+#' Verifies estimation results. Function stops with an error message if verfication fails.
+#' @param so - standard output object from an execution
+#' @param outputDirectory - a directory where the outputs reside
+#' @return true on successful execution
+verifyEstimate = function (so, outputDirectory) {
+	if(is.null(list.files(outputDirectory,pattern="\\.SO.xml$"))) {
+		stop("SO xml was not found.")
+	}
+	if(!is.null(so@TaskInformation$Messages$Errors)) {
+		print(so@TaskInformation$Messages$Errors)
+		stop("There are errors in the SO.")
+	}
+	if(is.null(so@Estimation@PopulationEstimates$MLE$data)) {
+		stop("MLE values were not populated.")
+	}
+	if(is.null(so@Estimation@Likelihood$Deviance)) {
+		stop("Log-Likelihood element was not set.")
+	}
+	return(TRUE)
+}
 
 
 #'

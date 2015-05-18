@@ -63,13 +63,11 @@ printMessage("Data contents:")
 head(myData)
 
 printMessage("Estimating with Nonmem")
-soNonmem <- estimate(mdlfile, target="NONMEM", subfolder=.resultDir("NONMEM"));
+resultDir = .resultDir("NONMEM");
+soNonmem <- estimate(mdlfile, target="NONMEM", subfolder= resultDir);
 
-if(length(soNonmem@TaskInformation$Messages$Errors)>0) {
-	printMessage(paste("There were errors when executing model",mdlfile))
-	print(soNonmem@TaskInformation$Messages$Errors)
-	stop("Error, see console output for details")
-}
+outputDirectory = file.path(mdlFileLocation,resultDir)
+verifyEstimate(soNonmem,outputDirectory)
 
 soNonmemUC51 <- soNonmem;
 
