@@ -56,12 +56,6 @@ myTaskObj
 #' Exploratory Data Analysis
 #' =========================
 
-printMessage("Reading in data from Data Object")
-myData <- read(myDataObj)
-
-printMessage("Data contents:")
-head(myData)
-
 printMessage("Estimating with Nonmem")
 resultDir = .resultDir("NONMEM");
 soNonmem <- estimate(mdlfile, target="NONMEM", subfolder= resultDir);
