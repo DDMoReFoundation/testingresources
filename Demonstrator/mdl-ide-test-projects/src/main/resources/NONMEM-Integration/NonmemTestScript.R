@@ -25,16 +25,15 @@ selectSupported <- function(models) {
 
 printMessage("Collecting list of models")
 models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
-printMessage(paste(models))
+printMessage(models)
+
 printMessage("Estimating models")
 models.SO <- estimateModelsWith(selectSupported(models), "NONMEM")
-
 
 printMessage("Validating results of estimation")
 models.validated <- verifyExecutions(models.SO)
 
 printMessage("Creating Xpose databases")
 models.xposedbs <- createXposeDatabases(models.validated)
-
 
 printMessage("DONE")

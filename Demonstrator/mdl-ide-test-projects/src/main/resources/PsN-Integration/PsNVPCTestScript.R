@@ -15,8 +15,14 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
+selectSupported <- function(models) {
+	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
+}
+
 models <- .getMDLFilesFromModelDirectoryFlat(modelsDir);
-model <- models[[1]]
+#We just need to check one.
+model <- selectSupported(models)[[1]]
 mdlfile <- file.path(modelsDir,model)
 
 printMessage("Reading in the Model")
@@ -45,6 +51,8 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 
 printMessage("Running Estimation (this can take about 5 minutes)")
 baseSO <- estimate(mdlfile, target="PsN", subfolder=.resultDir(paste0("PsNVPCTestScript-Base-",model)))
+
+verifyEstimate(baseSO)
 
 printMessage("Populating the Parameter object with final estimates")
 myParObjUpdated=update.warfarin.params.with.final.estimates(parObj, bootSO)

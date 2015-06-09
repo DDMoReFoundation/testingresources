@@ -58,8 +58,8 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 	lapply(models, function(modelFile) {
 				setwd(mdlIdeProjectPath)
 				modelFilePath = file.path(modelsSubDirectory,modelFile);
-				printMessage(paste("Running",target,"with ", modelFilePath))
-				resultDir = .resultDir(paste0(target,"-",basename(modelFile)));
+				printMessage(paste("Running ",target," with ", modelFilePath))
+				resultDir = .resultDir(paste0(basename(modelFile),"-",target));
 				so <- estimate(modelFilePath, target=target, subfolder=resultDir);
 				warnings()
 				if(!HEADLESS) {
@@ -82,12 +82,18 @@ verifyEstimate = function (so, outputDirectory=NULL) {
 	assert(is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !HEADLESS)
 }
 
+#' Asserts that a given condition is met, if not it will print an error message and return FALSE
+#' or it will stop the execution with a given message.
+#' @param condition - expression which should eval to true
+#' @param message - a message that will be used as error message if the condition is not met
+#' @return true on successful execution, false if the the condition is not true
 assert = function (condition, message, stop=TRUE) {
 	if(condition) {
+		errorMsg = paste0("Assertion failed: ", message)
 		if(stop) {
-			stop(message)
+			stop(errorMsg)
 		} else {
-			printMessage(message)
+			printMessage(errorMsg)
 			return(FALSE)
 		}
 	}
@@ -98,7 +104,8 @@ assert = function (condition, message, stop=TRUE) {
 #' Prints a formatted message
 printMessage <- function(message) {
 	cat(paste(replicate(60, "#"), collapse = ""))
-	cat(paste0("\n", message, "\n"))
+	cat("\n")
+	print(message)
 	cat(paste(replicate(60, "#"), collapse = ""))
 	cat("\n")
 }
@@ -109,7 +116,7 @@ printMessage <- function(message) {
 #' follows the convention <modelsRootDir>\<MODEL_FILE>
 #' The paths are relative to the modelsRootDir
 .getMDLFilesFromModelDirectoryFlat <- function(modelsRootDir) {
-	files = dir(modelsRootDir, pattern=".*\\.mdl")
+	files = dir(modelsRootDir, pattern=".*\\.mdl$")
 	cat(paste0("Looking for models in ",modelsRootDir, "\n"))
 	files
 }

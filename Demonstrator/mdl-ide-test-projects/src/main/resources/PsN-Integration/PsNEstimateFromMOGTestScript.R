@@ -15,8 +15,14 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
+selectSupported <- function(models) {
+	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
+}
+
 models <- .getMDLFilesFromModelDirectoryFlat(modelsDir);
-model <- models[[1]]
+#We just need to check one.
+model <- selectSupported(models)[[1]]
 mdlfile <- file.path(modelsDir,model)
 
 printMessage("Reading the model")
@@ -30,5 +36,7 @@ dynamicMog=createMogObj(myDataObj, myParObj, myModObj, myTaskObj, "execute_mog")
 
 printMessage("Running Estimation (this can take about 5 minutes)")
 baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEstimateFromMOGTestScript-",model)))
+
+verifyEstimate(baseSO)
 
 printMessage("DONE")
