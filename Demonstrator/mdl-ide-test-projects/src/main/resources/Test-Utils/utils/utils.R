@@ -44,6 +44,7 @@ createXposeDatabases <- function(models.validated) {
 			} else {
 				printMessage(paste("There were errors when executing model",model[["modelFile"]],"skipping Xpose database creation"))
 			}
+			model
 		})
 }
 
@@ -54,18 +55,18 @@ createXposeDatabases <- function(models.validated) {
 #' @return list of lists with elements: 
 #' 'so' - standard output object, 
 #' 'modelFile' - model file used, 
-estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, modelsSubDirectory = modelsDir) {
+estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, modelsSubDirectory = modelsDir, targetArgs=NULL) {
 	lapply(models, function(modelFile) {
 				setwd(mdlIdeProjectPath)
 				modelFilePath = file.path(modelsSubDirectory,modelFile);
 				printMessage(paste("Running ",target," with ", modelFilePath))
 				resultDir = .resultDir(paste0(basename(modelFile),"-",target));
-				so <- estimate(modelFilePath, target=target, subfolder=resultDir);
+				so <- tryCatch( {
+					estimate(modelFilePath, target=target, addargs=targetArgs, subfolder=resultDir);
+				}, error = function(err) {
+					NULL
+				})
 				warnings()
-				if(!HEADLESS) {
-					printMessage("Please, verify that the execution did not fail")
-					readline("Press <Return> to continue") 
-				}
 				model <- list("modelFile" = modelFilePath, "so" = so, "resultDir" = resultDir)
 				return(model)
 			})
@@ -76,6 +77,7 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 #' @param outputDirectory - a directory where the outputs reside
 #' @return true on successful execution
 verifyEstimate = function (so, outputDirectory=NULL) {
+	assert(!is.null(so),"SO object was null.",!HEADLESS) &&
 	assert(!is.null(outputDirectory) && is.null(list.files(outputDirectory,pattern="\\.SO.xml$")),"SO xml was not found.",!HEADLESS) &&
 	assert(!is.null(so@TaskInformation$Messages$Errors),message(so@TaskInformation$Messages$Errors),!HEADLESS) &&
 	assert(is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !HEADLESS) &&
@@ -94,10 +96,9 @@ assert = function (condition, message, stop=TRUE) {
 			stop(errorMsg)
 		} else {
 			printMessage(errorMsg)
-			return(FALSE)
 		}
 	}
-	TRUE
+	return(condition)
 }
 
 #'
