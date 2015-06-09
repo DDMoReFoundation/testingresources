@@ -28,7 +28,7 @@ models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
 printMessage(models)
 
 printMessage("Estimating models")
-models.SO <- estimateModelsWith(selectSupported(models), "NONMEM", targetArgs="-prdefault")
+models.SO <- estimateModelsWith(selectSupported(models), "NONMEM")
 
 printMessage("Validating results of estimation")
 models.validated <- verifyExecutions(models.SO)

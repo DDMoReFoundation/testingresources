@@ -55,7 +55,7 @@ createXposeDatabases <- function(models.validated) {
 #' @return list of lists with elements: 
 #' 'so' - standard output object, 
 #' 'modelFile' - model file used, 
-estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, modelsSubDirectory = modelsDir, targetArgs=NULL) {
+estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, modelsSubDirectory = modelsDir, targetArgs="") {
 	lapply(models, function(modelFile) {
 				setwd(mdlIdeProjectPath)
 				modelFilePath = file.path(modelsSubDirectory,modelFile);
