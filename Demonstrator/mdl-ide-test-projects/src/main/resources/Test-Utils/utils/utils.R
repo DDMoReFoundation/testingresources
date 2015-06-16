@@ -64,6 +64,7 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 				so <- tryCatch( {
 					estimate(modelFilePath, target=target, addargs=targetArgs, subfolder=resultDir);
 				}, error = function(err) {
+				    warning(err)
 					NULL
 				})
 				warnings()
