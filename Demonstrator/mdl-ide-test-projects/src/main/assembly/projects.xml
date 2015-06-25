@@ -8,49 +8,8 @@
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
-        
         <fileSet>
-            <directory>target/test-models/MDL/Product4</directory>
-            <outputDirectory>Monolix-Integration/models</outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        
-        <fileSet>
-            <directory>target/test-models/MDL/Product4</directory>
-            <outputDirectory>NONMEM-Integration/models</outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        
-        <fileSet>
-            <directory>target/test-models/MDL/Product4</directory>
-            <outputDirectory>PsN-Integration/models</outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        
-        <fileSet>
-            <directory>target/test-models/MDL/Product4</directory>
-            <outputDirectory>Simulix-Integration/models</outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-        
-        <fileSet>
-            <directory>target/test-models/MDL/Product4</directory>
-            <outputDirectory>Demo-Scripts/models</outputDirectory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </fileSet>
-		
-        <fileSet>
-            <directory>src/main/resources</directory>
+            <directory>target/testProjects</directory>
             <outputDirectory>.</outputDirectory>
             <includes>
                 <include>**/*</include>
