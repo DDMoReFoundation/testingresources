@@ -55,4 +55,4 @@ models.simulix = lapply(models.converted, function(model) {
 		});
 
 
-printMessage("DONE")
+finalStatus()

@@ -64,4 +64,5 @@ printMessage("Running VPC (this can take about 5 minutes)")
 vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",model)));
 
 printMessage("Check if the graph was produced")
-printMessage("DONE")
+
+finalStatus()

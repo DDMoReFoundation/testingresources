@@ -39,4 +39,4 @@ baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEst
 
 verifyEstimate(baseSO)
 
-printMessage("DONE")
+finalStatus()
