@@ -20,11 +20,11 @@ models.validated = list()
 models.xposedbs = list()
 
 printMessage("Collecting list of models")
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat()
 printMessage(paste(models))
 
 selectSupported <- function(models) {
-	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 

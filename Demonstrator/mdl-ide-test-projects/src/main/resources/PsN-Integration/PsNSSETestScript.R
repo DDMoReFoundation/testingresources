@@ -15,12 +15,11 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
-model <- models[[1]]
-mdlfile <- file.path(modelsDir,model)
+mdlfile <- models[[1]]
 
 printMessage("Running SSE (this can take about 3 minutes)")
-sseSO <- SSE.PsN(mdlfile,samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir(paste0("PsNSSETestScript-SSE-",model)))
+sseSO <- SSE.PsN(mdlfile,samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir(paste0("PsNSSETestScript-SSE-",basename(model))))
 
 testSummary()

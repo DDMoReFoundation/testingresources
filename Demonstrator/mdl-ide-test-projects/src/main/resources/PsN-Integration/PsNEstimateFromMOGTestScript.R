@@ -16,14 +16,13 @@ setwd(projectPath)
 projectPath = getwd();
 
 selectSupported <- function(models) {
-	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
-model <- selectSupported(models)[[1]]
-mdlfile <- file.path(modelsDir,model)
+mdlfile <- selectSupported(models)[[1]]
 
 printMessage("Reading the model")
 myDataObj <- getDataObjects(mdlfile)[[1]]
@@ -35,7 +34,7 @@ printMessage("Create a MOG")
 dynamicMog=createMogObj(myDataObj, myParObj, myModObj, myTaskObj, "execute_mog")
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEstimateFromMOGTestScript-",model)))
+baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEstimateFromMOGTestScript-",basename(model))))
 
 verifyEstimate(baseSO)
 

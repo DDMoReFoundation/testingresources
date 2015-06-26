@@ -115,31 +115,19 @@ printMessage <- function(message) {
 
 
 
-#' Returns all MDL files found in the subdirectory of the given directory
-#' follows the convention <modelsRootDir>\<MODEL_FILE>
-#' The paths are relative to the modelsRootDir
-.getMDLFilesFromModelDirectoryFlat <- function(mdlIdeProjectPath = projectPath, modelsDirName = "models") {
-    modelsRootDir <- file.path(mdlIdeProjectPath, modelsDirName)
-    cat(paste0("Looking for models in ",modelsRootDir,"\n"))
-    files = dir(modelsRootDir, pattern=".*\\.mdl$")
-    files
-}
-
-#' Returns all MDL files found in the subdirectory of the given directory
-#' follows the convention <modelsRootDir>\<MODEL_DIR>\<MODEL_FILE>
-#' The paths are relative to the modelsRootDir
-.getMDLFilesFromModelDirectory <- function(mdlIdeProjectPath = projectPath, modelsDirName = "models") {
-    modelsRootDir <- file.path(mdlIdeProjectPath, modelsDirName)
-    cat(paste0("Looking for models in ",modelsRootDir,"\n"))
-    modelDirs <- dir(modelsRootDir)
-    lapply(modelDirs,function(modelDir) {
-                file <- grep(".*\\.mdl",dir(file.path(modelsRootDir,modelDir)),fixed=FALSE,invert=FALSE,value=TRUE)
-                if (length(file)==1){
-                    return(file.path(modelDir,file[1]));
-                } else if(length(file)>1) {
-                    stop(paste("More then one mdl file found in",modelDir,"! Fix the issue!"))
-                }
-            })
+#' Returns all MDL files found in mdlIdeProjectPath's subdirectories listed in modelsDirNames
+#' follows the convention <mdlIdeProjectPath>\<modelsDirName>\<MODEL_FILE>
+#' The paths are relative to the mdlIdeProjectPath
+.getMDLFilesFromModelDirectoryFlat <- function(mdlIdeProjectPath = projectPath, modelsDirNames = list("models")) {
+    unlist(lapply(modelsDirNames, function(modelsDirName) {
+                modelsDir <- file.path(mdlIdeProjectPath, modelsDirName)
+                cat(paste0("Looking for models in ",modelsDir,"\n"))
+                files = dir(modelsDir, pattern=".*\\.mdl$")
+                unlist(lapply(files, function(x) {
+                                    file.path(modelsDirName, x)
+                                }))
+            }))
+    
 }
 
 #' Generates a result directory name

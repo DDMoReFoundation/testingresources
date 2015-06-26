@@ -6,7 +6,7 @@
 #' =========================
 
 if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
-	stop(".MDLIDE_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
+    stop(".MDLIDE_WORKSPACE_PATH variable should be set to the path of the MDL IDE workspace")
 }
 source(file.path(.MDLIDE_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 projectPath="NONMEM-Integration"
@@ -18,12 +18,12 @@ models.SO = list()
 models.validated = list()
 
 selectSupported <- function(models) {
-	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
-	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
+    supportedModels = list("models/UseCase1.mdl")
+    models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
 printMessage("Collecting list of models")
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat(modelsDirNames = list("models", "cns"))
 printMessage(models)
 
 printMessage("Estimating models")

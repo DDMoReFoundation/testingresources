@@ -19,15 +19,14 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 
 selectSupported <- function(models) {
-	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
-model <- selectSupported(models)[[1]]
-mdlfile <- file.path(modelsDir,model)
+mdlfile <- selectSupported(models)[[1]]
 
-bootSO <- bootstrap.PsN(mdlfile,samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir(paste0("PsNBootstrapTestScript-Bootstrap-",model)))
+bootSO <- bootstrap.PsN(mdlfile,samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir(paste0("PsNBootstrapTestScript-Bootstrap-",basename(model))))
 
 testSummary()

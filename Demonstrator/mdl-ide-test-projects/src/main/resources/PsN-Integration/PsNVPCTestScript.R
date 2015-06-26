@@ -16,14 +16,13 @@ setwd(projectPath)
 projectPath = getwd();
 
 selectSupported <- function(models) {
-	supportedModels = list("UseCase1.mdl", "UseCase5_1.mdl")
+	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
-model <- selectSupported(models)[[1]]
-mdlfile <- file.path(modelsDir,model)
+mdlfile <- selectSupported(models)[[1]]
 
 printMessage("Reading in the Model")
 myDataObj <- getDataObjects(mdlfile)[[1]]
@@ -50,7 +49,7 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-baseSO <- estimate(mdlfile, target="PsN", subfolder=.resultDir(paste0("PsNVPCTestScript-Base-",model)))
+baseSO <- estimate(mdlfile, target="PsN", subfolder=.resultDir(paste0("PsNVPCTestScript-Base-",basename(model))))
 
 verifyEstimate(baseSO)
 
@@ -61,7 +60,7 @@ printMessage("Assembling the new mog")
 myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, mdlObj = myModObj, taskObj = myTaskObj, "Warfarin_ODE_latest_VPC")
 
 printMessage("Running VPC (this can take about 5 minutes)")
-vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",model)));
+vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",basename(model))));
 
 printMessage("Check if the graph was produced")
 
