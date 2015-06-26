@@ -77,11 +77,9 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 
 #' Verifies estimation results. Function stops with an error message if verfication fails.
 #' @param so - standard output object from an execution
-#' @param outputDirectory - a directory where the outputs reside
 #' @return true on successful execution
-verifyEstimate = function (so, outputDirectory=NULL) {
+verifyEstimate = function (soL) {
     assert(!is.null(so),"SO object was null.",!HEADLESS) &&
-    assert(!is.null(outputDirectory) && is.null(list.files(outputDirectory,pattern="\\.SO.xml$")),"SO xml was not found.",!HEADLESS) &&
     assert(!is.null(so@TaskInformation$Messages$Errors),message(so@TaskInformation$Messages$Errors),!HEADLESS) &&
     assert(is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !HEADLESS) &&
     assert(is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !HEADLESS)
@@ -93,7 +91,7 @@ verifyEstimate = function (so, outputDirectory=NULL) {
 #' @param message - a message that will be used as error message if the condition is not met
 #' @return true on successful execution, false if the the condition is not true
 assert = function (condition, message, stop=TRUE) {
-    if(condition) {
+    if(!condition) {
         errorMsg = paste0("Assertion failed: ", message)
         recordError(errorMsg)
         if(stop) {
