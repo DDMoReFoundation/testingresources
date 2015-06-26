@@ -65,4 +65,4 @@ vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3",
 
 printMessage("Check if the graph was produced")
 
-finalStatus()
+testSummary()

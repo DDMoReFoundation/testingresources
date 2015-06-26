@@ -31,4 +31,4 @@ models.validated <- verifyExecutions(models.SO)
 printMessage("Creating Xpose databases")
 models.xposedbs <- createXposeDatabases(models.validated)
 
-finalStatus()
+testSummary()

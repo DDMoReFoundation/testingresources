@@ -78,11 +78,11 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 #' Verifies estimation results. Function stops with an error message if verfication fails.
 #' @param so - standard output object from an execution
 #' @return true on successful execution
-verifyEstimate = function (soL) {
+verifyEstimate = function (so) {
     assert(!is.null(so),"SO object was null.",!HEADLESS) &&
-    assert(!is.null(so@TaskInformation$Messages$Errors),message(so@TaskInformation$Messages$Errors),!HEADLESS) &&
-    assert(is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !HEADLESS) &&
-    assert(is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !HEADLESS)
+    assert(is.null(so@TaskInformation$Messages$Errors),paste0("There were error messages set on the SO ", so@TaskInformation$Messages$Errors),!HEADLESS) &&
+    assert(!is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !HEADLESS) &&
+    assert(!is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !HEADLESS)
 }
 
 #' Asserts that a given condition is met, if not it will print an error message and return FALSE
@@ -176,9 +176,9 @@ resetErrors <- function() {
 #' finalStatus
 #' prints final status or results in error with all errors recorded
 #'
-finalStatus <- function() {
+testSummary <- function() {
     if(length(.errors)>0) {
-        stop(.errors)
+        stop(paste(.errors, collapse="\n"))
     } else {
         printMessage("SUCCESS")
     }

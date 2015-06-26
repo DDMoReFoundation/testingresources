@@ -22,4 +22,4 @@ mdlfile <- file.path(modelsDir,model)
 printMessage("Running SSE (this can take about 3 minutes)")
 sseSO <- SSE.PsN(mdlfile,samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir(paste0("PsNSSETestScript-SSE-",model)))
 
-finalStatus()
+testSummary()

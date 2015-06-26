@@ -30,4 +30,4 @@ mdlfile <- file.path(modelsDir,model)
 
 bootSO <- bootstrap.PsN(mdlfile,samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir(paste0("PsNBootstrapTestScript-Bootstrap-",model)))
 
-finalStatus()
+testSummary()

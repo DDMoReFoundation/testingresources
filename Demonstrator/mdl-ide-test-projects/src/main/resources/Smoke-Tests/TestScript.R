@@ -67,4 +67,4 @@ soNonmem <- estimate(mdlfile, target="NONMEM", subfolder=.resultDir("NONMEM"));
 
 verifyEstimate(soNonmem)
 
-finalStatus()
+testSummary()
