@@ -1,6 +1,8 @@
-#' Executing Simulix
+#' Executing Simulx
 #' =========================================================================================
 #' =========================================================================================
+stop("Simulx integration is not yet supported by the Framework.")
+
 
 library('mlxR')
 library('ggplot2')

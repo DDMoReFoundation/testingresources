@@ -23,8 +23,8 @@ selectSupported <- function(models) {
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir);
-#We just need to check one.
+models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+# We just need to check one model as part of system tests.
 model <- selectSupported(models)[[1]]
 mdlfile <- file.path(modelsDir,model)
 

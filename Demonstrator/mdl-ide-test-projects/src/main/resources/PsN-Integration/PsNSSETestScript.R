@@ -15,7 +15,8 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
-models <- .getMDLFilesFromModelDirectoryFlat(modelsDir);
+models <- .getMDLFilesFromModelDirectoryFlat(modelsDir)
+# We just need to check one model as part of system tests.
 model <- models[[1]]
 mdlfile <- file.path(modelsDir,model)
 

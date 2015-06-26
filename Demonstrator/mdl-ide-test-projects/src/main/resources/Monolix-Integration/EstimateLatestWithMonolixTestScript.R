@@ -1,6 +1,7 @@
 #' Executing Monolix against the supported models.
 #' =========================================================================================
 #' =========================================================================================
+stop("Monolix integration is not yet supported by the Framework.")
 
 #' Initialisation
 #' =========================
