@@ -4,6 +4,7 @@
 import static groovy.io.FileType.FILES
 
 import org.apache.commons.io.FilenameUtils
+
 /**
  * This script is responsible for expanding Test Script Templates and generating separate TestScript for each MDL use case
  */
