@@ -15,11 +15,16 @@ setwd(.MDLIDE_WORKSPACE_PATH)
 setwd(projectPath)
 projectPath = getwd();
 
+selectSupported <- function(models) {
+    supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
+    models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
+}
+
 models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
-mdlfile <- models[[1]]
+mdlfile <- selectSupported(models)[[1]]
 
 printMessage("Running SSE (this can take about 3 minutes)")
-sseSO <- SSE.PsN(mdlfile,samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir(paste0("PsNSSETestScript-SSE-",basename(model))))
+sseSO <- SSE.PsN(mdlfile,samples=20, seed=1234, sseOptions=" -no-estimate_simulation -threads=3", subfolder=.resultDir(paste0("PsNSSETestScript-SSE-",basename(mdlfile))))
 
 testSummary()

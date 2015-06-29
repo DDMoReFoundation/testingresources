@@ -18,7 +18,7 @@ models.SO = list()
 models.validated = list()
 
 selectSupported <- function(models) {
-    supportedModels = list("models/UseCase1.mdl")
+    supportedModels = list("models/UseCase1.mdl", "models/UseCase2.mdl", "models/UseCase5.mdl", "models/UseCase7.mdl", "models/UseCase11.mdl")
     models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
