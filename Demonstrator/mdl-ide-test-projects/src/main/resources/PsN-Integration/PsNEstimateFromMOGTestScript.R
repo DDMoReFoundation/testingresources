@@ -16,7 +16,7 @@ setwd(projectPath)
 projectPath = getwd();
 
 selectSupported <- function(models) {
-	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
+	supportedModels = list("models/UseCase7.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
@@ -31,10 +31,12 @@ myModObj <- getModelObjects(mdlfile)[[1]]
 myTaskObj <- getTaskPropertiesObjects(mdlfile)[[1]]
 
 printMessage("Create a MOG")
+
+setwd("models")
 dynamicMog=createMogObj(myDataObj, myParObj, myModObj, myTaskObj, "execute_mog")
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEstimateFromMOGTestScript-",basename(model))))
+baseSO <- estimate(dynamicMog, target="PsN", subfolder=.resultDir(paste0("PsNEstimateFromMOGTestScript-",basename(mdlfile))))
 
 verifyEstimate(baseSO)
 

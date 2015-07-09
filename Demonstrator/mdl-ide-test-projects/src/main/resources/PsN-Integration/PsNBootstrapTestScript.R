@@ -27,6 +27,6 @@ models <- .getMDLFilesFromModelDirectoryFlat()
 # We just need to check one model as part of system tests.
 mdlfile <- selectSupported(models)[[1]]
 
-bootSO <- bootstrap.PsN(mdlfile,samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir(paste0("PsNBootstrapTestScript-Bootstrap-",basename(model))))
+bootSO <- bootstrap.PsN(mdlfile,samples=20, seed=1234, bootstrapOptions=" -threads=3", subfolder=.resultDir(paste0("PsNBootstrapTestScript-Bootstrap-",basename(mdlfile))))
 
 testSummary()

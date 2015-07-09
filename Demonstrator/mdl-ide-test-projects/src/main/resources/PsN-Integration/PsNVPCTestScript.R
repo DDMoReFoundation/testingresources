@@ -16,7 +16,7 @@ setwd(projectPath)
 projectPath = getwd();
 
 selectSupported <- function(models) {
-	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
+	supportedModels = list("models/UseCase7.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 
@@ -37,8 +37,8 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 	temp <- baseSO@Estimation@PopulationEstimates$MLE$data
 	parValues <- as.numeric(temp[1,])
 	parNames <- names(as.data.frame(temp))
-	structuralNames <- c("POP_CL","POP_V","POP_KA","POP_TLAG")
-	variabilityNames <- c("PPV_CL","PPV_V","PPV_KA","PPV_TLAG","RUV_PROP","RUV_ADD", "CORR_PPV_CL_V")
+	structuralNames <- c("POP_CL","POP_V","POP_KA","POP_TLAG", "RUV_PROP", "RUV_ADD")
+	variabilityNames <- c("PPV_CL","PPV_V","PPV_KA","PPV_TLAG", "OMEGA")
 	
 #' We can then update the parameter object using the "update" function
 	myParObjUpdated <- update(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
@@ -49,7 +49,7 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 
 
 printMessage("Running Estimation (this can take about 5 minutes)")
-baseSO <- estimate(mdlfile, target="PsN", subfolder=.resultDir(paste0("PsNVPCTestScript-Base-",basename(model))))
+baseSO <- estimate(mdlfile, target="PsN", subfolder=.resultDir(paste0("PsNVPCTestScript-Base-",basename(mdlfile))))
 
 verifyEstimate(baseSO)
 
@@ -60,7 +60,8 @@ printMessage("Assembling the new mog")
 myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, mdlObj = myModObj, taskObj = myTaskObj, "Warfarin_ODE_latest_VPC")
 
 printMessage("Running VPC (this can take about 5 minutes)")
-vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",basename(model))));
+setwd("models")
+vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",basename(mdlfile))));
 
 printMessage("Check if the graph was produced")
 
