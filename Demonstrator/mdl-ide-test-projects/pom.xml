@@ -107,7 +107,8 @@
                     <execution>
                         <configuration>
                             <descriptors>
-                                <descriptor>${basedir}/src/main/assembly/projects.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/at.xml</descriptor>
+                                <descriptor>${basedir}/src/main/assembly/usecases.xml</descriptor>
                             </descriptors>
                         </configuration>
                         <id>make-exec</id>
