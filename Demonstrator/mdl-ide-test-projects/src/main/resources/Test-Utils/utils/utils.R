@@ -1,10 +1,65 @@
 #
 # Global settings
 #
+library(testthat)
 
-#' Should user NOT be propted to check outputs?
-HEADLESS=TRUE;
+#' What is the mode of the test script execution, 
+#' if HEADLESS=TRUE then different assumptions are being made regarding possible user's feedback and reports being created by testthat
+if(!exists(".HEADLESS")) {
+	.HEADLESS=FALSE
+}
 
+
+#' Build ID
+if(!exists(".BUILD_ID")) {
+	.BUILD_ID="dev"
+}
+#' Test Project name
+if(!exists(".PROJECT_NAME")) {
+	.PROJECT_NAME="dev"
+}
+#' Test Script name
+if(!exists(".SCRIPT_NAME")) {
+	.SCRIPT_NAME="dev"
+}
+
+
+#
+# Internal variables, don't change!!!
+#
+#' Cache directory location
+if(!exists(".CACHE_DIR")) {
+	.CACHE_DIR <- file.path(.MDLIDE_WORKSPACE_PATH, "Test-Utils")
+}
+#' Name of the file holding results traceback information
+CACHE_ENTRY_FILE=".cacheEntry"
+
+#' Creates test that reporter based on the mode of the test harness (headless vs interactive)
+createReporter <- function() {
+	if(.HEADLESS) {
+		return(StopReporter$new())
+	} else {
+		return(SummaryReporter$new())
+	}
+}
+
+#'
+#' Runs a given code
+#' this function ensures that the testthat's reporter is correctly initialized and ended after the script's execution
+#' (N.B. this is normally done by testthat, when the tests are invoked via 'test_package' function
+#' @param code the closure to execute
+#' @param env the environment against which to execute the closure
+#' @param reporter the reporter to use
+#' 
+run <- function(code = NULL, env = parent.frame(), reporter = createReporter()) {
+	testthat:::set_reporter(reporter)
+	reporter$start_reporter()
+	error <- try(eval(code, env))
+	reporter$end_reporter()
+	if(reporter$failed || class(error)=="try-error") {
+		stop(reporter$failures)
+	}
+}
 
 ##########################################################################################
 # Common Bulk Modelling Tasks
@@ -79,10 +134,10 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
 #' @param so - standard output object from an execution
 #' @return true on successful execution
 verifyEstimate = function (so) {
-    assert(!is.null(so),"SO object was null.",!HEADLESS) &&
-    assert(is.null(so@TaskInformation$Messages$Errors),paste0("There were error messages set on the SO ", so@TaskInformation$Messages$Errors),!HEADLESS) &&
-    assert(!is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !HEADLESS) &&
-    assert(!is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !HEADLESS)
+    assert(!is.null(so),"SO object was null.",!.HEADLESS) &&
+    assert(is.null(so@TaskInformation$Messages$Errors),paste0("There were error messages set on the SO ", so@TaskInformation$Messages$Errors),!.HEADLESS) &&
+    assert(!is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !.HEADLESS) &&
+    assert(!is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !.HEADLESS)
 }
 
 #' Asserts that a given condition is met, if not it will print an error message and return FALSE
@@ -135,6 +190,16 @@ printMessage <- function(message) {
     paste0(basename,"_",format(Sys.time(),"%H%M%S"),".out")
 }
 
+#'
+#' Performs test script initialization
+#' @param project name
+#'
+initialize <- function(projectName) {
+	setwd(.MDLIDE_WORKSPACE_PATH)
+	setwd(projectName)
+}
+
+
 ##############################################################
 #' parent.folder
 #'
@@ -179,3 +244,119 @@ testSummary <- function() {
 recordError <- function(errorMsg) {
     .errors <<- c(.errors, errorMsg)
 }
+
+#'
+#' Resolves model file path from a modelPath.
+#'
+#' @usage getModel("models/UseCase1")
+#'
+#' @param modelPath a path to a model within project (without extension)
+#' @param projectPath the path to the project against which to resolve model file name
+#'
+getModel <- function(modelPath, projectPath = getwd()) {
+	file.path(projectPath, paste0(modelPath,".mdl"))
+}
+
+#'
+#' Generates results directory for given modelPath and target tool.
+#'
+#' Note, this function encapsulates the naming convention of the results directory 
+#' and ensures that the test harness is able to attach semantics to created resources by the test scripts
+#'
+#' @usage getResultDir("models/UseCase1", "NONMEM")
+#'
+#' @param modelPath a path to a model within project (without extension)
+#' @param target the target tool of which the result files will be stored in the directory
+#' @param projectPath the path to the project against which to resolve model file name
+#' @param id optional identifier that can be used to uniquely name the directory
+#'
+getResultDir <- function(modelPath, target, projectPath = getwd(), id = "") {
+	modelPath <- getModel(modelPath, projectPath)
+	paste0(modelPath, "-", target, ifelse(id=="", "", paste0("-",id)))
+}
+
+#'
+#' Gets SO file location for given modelPath
+#' @param see getResultDir for parameters
+#'
+getResult <- function (modelPath, target, projectPath = getwd(), id = "") {
+	modelFilePath <- getModel(modelPath, projectPath)
+	file.path(getResultDir(modelPath, target, projectPath, id), paste0(file_path_sans_ext(basename(modelFilePath)), ".SO.xml"))
+}
+
+#'
+#' Copies from directory contents to 'to' directory
+#'
+copy.dir <- function(from, to) {
+	if (!file.exists(to)) {
+		dir.create(to)
+	}
+	all.regular.files <- list.files(from, pattern=".*")
+	files.to.copy <- paste0(from, "/", all.regular.files) # Turn the filenames into full paths
+	file.copy(files.to.copy, to, recursive=TRUE)
+}
+
+
+#
+# Promoting/caching results mechanism.
+#
+
+#'
+#' Promotes a given results directory and makes it available to other test scripts for import
+#' @param modelPath - the path to model file with which to associate the result (relative to project root)
+#' @param resultDir - the results directory
+#' @param target - the target that produced the result (e.g. NONMEM, MONOLIX, Bootstrap, etc.)
+#' @return directory where the promoted result directory has been copied to
+promoteResult <- function(modelPath, resultDir, target) {
+	targetDir <- .getPromotedResultDirectory(modelPath, target)
+	if(file.exists(targetDir)) {
+		unlink(targetDir, recursive=TRUE)
+	}
+	copy.dir(resultDir, targetDir)
+	.createPromotionRecord(modelPath, targetDir)
+	return(targetDir)
+}
+
+#'
+#' Imports promoted result. If the directory where the results should be imported already exist this function silently skips the copy operation.
+#'
+#' @param modelPath - the path to the model file (relative to project root)
+#' @param target - the target tool that produced the result (e.g. NONMEM)
+#' @param projectPath - the project root where the result should be imported to
+#' @return the directory where the results have been imported
+#'
+#' @throw function stops if the results directory for given model don't exist 
+importPromotedResultDir <- function(modelPath, target, projectPath = getwd(), id = "") {
+	resultDir <- getResultDir(modelPath, target, projectPath, id)
+	if(file.exists(resultDir)) {
+		#The promoted result already exists in local project workspace
+		return(resultDir)
+	}
+	promoted <- .getPromotedResultDirectory(modelPath, target)
+	if(!file.exists(promoted)) {
+		stop(paste("There is no result directory for", modelPath, "and", target,
+						".\nHas the",modelPath,"been executed and its results been 'promoted'?"))
+	}
+	copy.dir(promoted, resultDir)
+	return(resultDir)
+}
+
+#'
+#' Internal
+#' gets the location of the result directory within cache directory
+#'
+.getPromotedResultDirectory <- function(modelPath, target) {
+	getResultDir(modelPath, target, .CACHE_DIR)
+}
+
+#'
+#' Internal
+#' Creates a JSON formatted file that holds traceability information associated with results being promoted
+#'
+.createPromotionRecord <- function(modelPath, targetDir) {
+	metadata = list("buildId" = .BUILD_ID, "modelPath" = modelPath,  "scriptName" = .SCRIPT_NAME, "projectName" = .PROJECT_NAME, "timestamp" = format(Sys.time(),"%H%M%S"))
+	fileConn<-file(file.path(targetDir, CACHE_ENTRY_FILE))
+	writeLines(toJSON(metadata), fileConn)
+	close(fileConn)
+}
+

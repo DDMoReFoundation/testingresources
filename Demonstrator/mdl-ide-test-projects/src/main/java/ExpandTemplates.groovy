@@ -22,9 +22,15 @@ createInitialStructure(testProjectsSource, testProjectsTarget, testModelsDirs)
 
 expandTemplates(testProjectsSource, testProjectsTarget, testModelsDirs)
 
+def replaceTokens(text, binding) {
+    binding.each { from, to ->
+        text = text.replaceAll(/(\[${from}\])/, to)
+    }
+    return text
+}
 
 def createInitialStructure(testProjectsSource, testProjectsTarget, testModelsDirs) {
-    testProjectsSource.eachDir { sourceProject ->
+    testProjectsSource.eachDirMatch ({ !new File(it).name.contains("[") }) { sourceProject ->
         File targetProject = new File(testProjectsTarget, sourceProject.getName() )
         println "Copying ${sourceProject} to ${targetProject}"
         
@@ -54,15 +60,20 @@ def expandTemplates(testProjectsSource, testProjectsTarget, testModelsDirs) {
         }
         
         def templates = it.listFiles().findAll {
-            it.name =~ /.*TestScriptTemplate\.R/
+            it.name =~ /.*test\.template.*/
         }
         
         mdlFiles.each { mdlFile ->
+            modelName = FilenameUtils.getBaseName(mdlFile.getName())
             templates.each {
-                def scriptFileName =  Eval.me("MODEL_NAME", FilenameUtils.getBaseName(mdlFile.getName()), "\"${it.getName()}\"").replaceAll("Template\\.R", ".R")
-                def binding = ["MODEL_DIR":it.getParentFile().toPath().relativize(mdlFile.getParentFile().toPath()), "MODEL_FILE":mdlFile.getName()]
-                def engine = new groovy.text.SimpleTemplateEngine()
-                def template = engine.createTemplate(it.text).make(binding)
+                def scriptFileName =  replaceTokens(it.getName(), ["MODEL_NAME" : FilenameUtils.getBaseName(mdlFile.getName())]).replaceAll("test\\.template", "test")
+                def modelDirRelativePath = FilenameUtils.separatorsToUnix(it.getParentFile().toPath().relativize(mdlFile.getParentFile().toPath()).toString())
+                println "Relative path to model file from R script is: ${modelDirRelativePath}"
+                def binding = ["MODEL_DIR":modelDirRelativePath, "MODEL_FILE":mdlFile.getName(), "MODEL_NAME":modelName]
+                def template = it.readLines().collect( {
+                    line ->
+                    replaceTokens(line, binding)
+                }).join ("\n")
                 new File(it.getParentFile(), scriptFileName).write(template.toString())
             }
         }

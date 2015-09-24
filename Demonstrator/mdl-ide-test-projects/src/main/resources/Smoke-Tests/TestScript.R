@@ -19,7 +19,7 @@ mdlFileLocation=file.path(projectPath, modelsDir)
 setwd(mdlFileLocation)
 
 
-mdlfile="UseCase1.mdl"
+mdlfile="UseCase2.mdl"
 printMessage(paste("Working with", mdlfile))
 
 
