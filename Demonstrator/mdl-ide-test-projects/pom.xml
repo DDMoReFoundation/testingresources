@@ -124,6 +124,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>4.2</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>1.6</version>
                 </plugin>
