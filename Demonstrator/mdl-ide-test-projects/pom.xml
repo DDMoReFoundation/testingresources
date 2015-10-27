@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.ddmore</groupId>
     <artifactId>mdl-ide-test-projects</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
     <name>MDL IDE Test Projects</name>
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <testdata.models.version>0.2.0-SNAPSHOT</testdata.models.version>
+        <testdata.models.version>0.3.0-SNAPSHOT</testdata.models.version>
     </properties>
 
     <dependencies>

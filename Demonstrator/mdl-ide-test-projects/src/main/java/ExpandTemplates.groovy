@@ -9,8 +9,7 @@ import org.apache.commons.io.FilenameUtils
  * This script is responsible for expanding Test Script Templates and generating separate TestScript for each MDL use case
  */
 def testProjectsSource = new File("./src/main/resources").getAbsoluteFile()
-def testModelsDirs = [ (new File("./target/test-models/MDL/6.0.8").getAbsoluteFile()) : "models",
-                        (new File("./target/test-models/MDL/6.0.8/CNS").getAbsoluteFile()) : "cns" ] 
+def testModelsDirs = [ (new File("./target/test-models/MDL/7.0.0").getAbsoluteFile()) : "models" ] 
 def testProjectsTarget = new File("./target/testProjects").getAbsoluteFile()
 
 println "Source Projects: ${testProjectsSource}"
