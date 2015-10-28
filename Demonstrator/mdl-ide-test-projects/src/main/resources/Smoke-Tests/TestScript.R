@@ -57,7 +57,7 @@ myTaskObj
 #' =========================
 
 printMessage("Reading in data from Data Object")
-myData <- read(myDataObj)
+myData <- readDataObj(myDataObj)
 
 printMessage("Data contents:")
 head(myData)

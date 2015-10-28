@@ -40,9 +40,9 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 	structuralNames <- c("POP_CL","POP_V","POP_KA","POP_TLAG")
 	variabilityNames <- c("PPV_CL","PPV_V","PPV_KA","PPV_TLAG","RUV_PROP","RUV_ADD", "CORR_PPV_CL_V")
 	
-#' We can then update the parameter object using the "update" function
-	myParObjUpdated <- update(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
-	myParObjUpdated <- update(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
+#' We can then update the parameter object using the "updateParObj" function
+	myParObjUpdated <- updateParObj(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
+	myParObjUpdated <- updateParObj(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
 	
 	myParObjUpdated
 }

@@ -66,8 +66,8 @@ myTaskObj
 #' Exploratory Data Analysis
 #' =========================
 
-#' Use TEL function read() to create an R object from the MCL data object
-myData <- read(myDataObj)
+#' Use TEL function readDataObj() to create an R object from the MCL data object
+myData <- readDataObj(myDataObj)
 
 #' Let's look at the first 6 lines of the data set
 head(myData)
@@ -104,9 +104,9 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 	structuralNames <- c("POP_CL","POP_V","POP_KA","POP_TLAG")
 	variabilityNames <- c("PPV_CL","PPV_V","PPV_KA","PPV_TLAG","RUV_PROP","RUV_ADD", "CORR_PPV_CL_V")
 	
-#' We can then update the parameter object using the "update" function
-	myParObjUpdated <- update(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
-	myParObjUpdated <- update(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
+#' We can then update the parameter object using the "updateParObj" function
+	myParObjUpdated <- updateParObj(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
+	myParObjUpdated <- updateParObj(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
 	
 	myParObjUpdated
 }
@@ -190,7 +190,7 @@ dev.off()
 #' Fit a "full" model with body weight as covariate on clearance and volume
 #' -------------------------
 #' We can update the parameter object using the "update" function
-myParObjUpdated <- update(myParObj,block="STRUCTURAL",item=c("BETA_CL_WT","BETA_V_WT"),with=list(value=c(0.75,1)))
+myParObjUpdated <- updateParObj(myParObj,block="STRUCTURAL",item=c("BETA_CL_WT","BETA_V_WT"),with=list(value=c(0.75,1)))
 
 #' Let's look at the updated MCL parameter object
 myParObjUpdated
@@ -200,7 +200,7 @@ myNewMOG <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, mdlObj =
 
 #' We can then write the MOG back out to MDL
 mdlfile.updated="Warfarin-ODE-latest-full.mdl"
-write(myNewMOG,mdlfile.updated)
+writeMogObj(myNewMOG,mdlfile.updated)
 
 #' We can then execute this .mdl file
 full <- estimate(mdlfile.updated, target="MONOLIX", subfolder="Full")

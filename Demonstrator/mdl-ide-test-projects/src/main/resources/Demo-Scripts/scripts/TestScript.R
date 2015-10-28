@@ -99,8 +99,8 @@ myTaskObj
 #' =========================
 
 #' Recall that getDataObjects only reads the MCL code from the .mdl file.
-#' Use TEL function read() to create an R object from the MCL data object.
-myData <- read(myDataObj)
+#' Use TEL function readDataObj() to create an R object from the MCL data object.
+myData <- readDataObj(myDataObj)
 
 #' Let's look at the first 6 lines of the data set
 head(myData)
@@ -221,16 +221,16 @@ parNames <- names(as.data.frame(temp))
 structuralNames <- c("POP_CL","POP_V","POP_KA","POP_TLAG")
 variabilityNames <- c("PPV_CL","PPV_V","PPV_KA","PPV_TLAG","RUV_PROP","RUV_ADD")
 
-#' We can then update the parameter object using the "update" function.  
-#' In future, we will alter the update(...) function to take a vector of parameters from the estimation
+#' We can then update the parameter object using the "updateParObj" function.  
+#' In future, we will alter the updateParObj(...) function to take a vector of parameters from the estimation
 #' to update ALL initial values.
 
 myParObj <- getParameterObjects(mdlfile)[[1]]
-myParObjUpdated <- update(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
-myParObjUpdated <- update(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
+myParObjUpdated <- updateParObj(myParObj,block="STRUCTURAL",item=parNames[parNames%in%structuralNames],with=list(value=parValues[parNames%in%structuralNames]))
+myParObjUpdated <- updateParObj(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
 
 #' The name of the correlation parameter 'CORR_PPV_CL_V' is different in the SO ('r_V_CL'), and needs to be handled differently 
-myParObjUpdated <- update(myParObjUpdated,block="VARIABILITY",item="CORR_PPV_CL_V",with=list(value=parValues[parNames%in%"CORR_PPV_CL_V"]))
+myParObjUpdated <- updateParObj(myParObjUpdated,block="VARIABILITY",item="CORR_PPV_CL_V",with=list(value=parValues[parNames%in%"CORR_PPV_CL_V"]))
 
 #' Let's now look at the updated MCL parameter object.
 myParObjUpdated
@@ -243,7 +243,7 @@ myNewMOG <- createMogObj(dataObj = getDataObjects(mdlfile)[[1]],
 
 #' We can then write the MOG back out to an .mdl file.
 mdlfile.updated <- "Warfarin-ODE-latest-VPC.mdl"
-write(myNewMOG,mdlfile.updated)
+writeMogObj(myNewMOG,mdlfile.updated)
 
 #' Now run the VPC using this new mdlfile.
 vpcFiles <- VPC.PsN(mdlfile.updated, 
@@ -274,7 +274,7 @@ myNewerMOG <- createMogObj(dataObj = getDataObjects(mdlfile)[[1]],
 
 #' We can then write the MOG back out to an .mdl file.
 mdlfile.FOCEI <- "Warfarin-ODE-latest-FOCEI.mdl"
-write(myNewerMOG,mdlfile.FOCEI)
+writeMogObj(myNewerMOG,mdlfile.FOCEI)
 
 #' Test estimation using this new MOG - check that estimation works prior to running the bootstrap.
 NM.FOCEI <- estimate(mdlfile.FOCEI, target="NONMEM", subfolder="NONMEM_FOCEI")

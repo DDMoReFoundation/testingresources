@@ -35,7 +35,7 @@ test_that(paste("Converting Monolix output for",case,"to XPDB"), {
 			expect_false(is.null(mlx.xpdb@Data), "Some data in the merged dataset")
 			expect_true(nrow(mlx.xpdb@Data)>0, "Some data in the merged dataset")
 			# Number of rows in xpdb@Data = nrows in dataset where MDV != 0 
-			#rawData <- read(getDataObjects(mdlfile)[[1]])
+			#rawData <- readDataObj(getDataObjects(mdlfile)[[1]])
 			#expect_equal(nrow(nm.xpdb@Data), nrow(subset.data.frame(rawData, (MDV==0)))) 
 		}
 )

@@ -63,7 +63,7 @@ test_that(paste("Get Data Object for",case), {
 			expect_equal(readDataBlocks, expectedDataBlocks, "Expected slots are present")
 				
 			## Read data from file
-			myData <- read(myDataObj)
+			myData <- readDataObj(myDataObj)
 			expect_is(myData, "data.frame")
 			expect_false(is.null(myData), "Expect some content")
 			expectedDataColumns <- names(myDataObj@DATA_INPUT_VARIABLES)
