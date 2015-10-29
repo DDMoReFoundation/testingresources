@@ -29,7 +29,7 @@ importPromotedResultDir(case, target="MONOLIX")
 mlx <- LoadSOObject(getResult(case, target="MONOLIX"))
 		
 test_that(paste("Converting Monolix output for",case,"to XPDB"), {
-			mlx.xpdb <- try(as.xpdb(mlx,file.path(dirname(mdlfile),getDataObjects(mdlfile)[[1]]@SOURCE$file)))
+			mlx.xpdb <- try(as.xpdb(mlx,file.path(dirname(mdlfile),getDataObjects(mdlfile)[[1]]@SOURCE[[1]]$file)))
 			expect_false(class(mlx.xpdb)=="try-error", "as.xpdb Doesn't crash with errors")
 			expect_is(mlx.xpdb,"xpose.data", "Is an Xpose database object")
 			expect_false(is.null(mlx.xpdb@Data), "Some data in the merged dataset")

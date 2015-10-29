@@ -30,7 +30,7 @@ importPromotedResultDir(case, target="NONMEM")
 nm <- LoadSOObject(getResult(case, target="NONMEM"))
 		
 test_that(paste("Converting NONMEM output for",case,"to XPDB"), {
-			nm.xpdb <- try(as.xpdb(nm,file.path(dirname(mdlfile),getDataObjects(mdlfile)[[1]]@SOURCE$file))) 
+			nm.xpdb <- try(as.xpdb(nm,file.path(dirname(mdlfile),getDataObjects(mdlfile)[[1]]@SOURCE[[1]]$file))) 
 			expect_false(class(nm.xpdb)=="try-error", "as.xpdb Doesn't crash with errors")
 			expect_is(nm.xpdb,"xpose.data", "Is an Xpose database object") 
 			expect_false(is.null(nm.xpdb@Data), "Some data in the merged dataset")

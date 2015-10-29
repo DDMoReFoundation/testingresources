@@ -57,7 +57,7 @@ test_that(paste("Get Data Object for",case), {
 			myDataObj <- myDataObj[[1]]
 			expect_is(myDataObj, "dataObj", "Should be of class dataObj")
 
-			expectedDataBlocks <- c("SOURCE", "DECLARED_VARIABLES", "DATA_INPUT_VARIABLES", "DATA_DERIVED_VARIABLES", "TARGET_CODE")
+			expectedDataBlocks <- c("SOURCE", "DECLARED_VARIABLES", "DATA_INPUT_VARIABLES", "DATA_DERIVED_VARIABLES")
 			expectedDataBlocks <- c(expectedDataBlocks, "name")
 			readDataBlocks <- slotNames(myDataObj)
 			expect_equal(readDataBlocks, expectedDataBlocks, "Expected slots are present")
@@ -84,7 +84,7 @@ test_that(paste("Get Parameter Object for",case), {
 			myParObj <- myParObj[[1]]
 			expect_is(myParObj, "parObj", "Should be of class parObj")
 			
-			expectedParBlocks <- c("DECLARED_VARIABLES", "STRUCTURAL", "VARIABILITY", "PRIOR_PARAMETERS", "TARGET_CODE")
+			expectedParBlocks <- c("DECLARED_VARIABLES", "STRUCTURAL", "VARIABILITY")
 			expectedParBlocks <- c(expectedParBlocks, "name")
 			readParBlocks <- slotNames(myParObj)
 			expect_equal(readParBlocks, expectedParBlocks, "Expected slots are present")
@@ -107,9 +107,7 @@ test_that(paste("Get Model Object for",case), {
 									 "VARIABILITY_LEVELS",        "STRUCTURAL_PARAMETERS",    
 		 						 	 "VARIABILITY_PARAMETERS",    "RANDOM_VARIABLE_DEFINITION",
 		 						 	 "INDIVIDUAL_VARIABLES",      "MODEL_PREDICTION",         
-		 						 	 "OBSERVATION",               "GROUP_VARIABLES",          
-		 						 	 "MODEL_OUTPUT_VARIABLES",    "ESTIMATION",               
-								 	 "SIMULATION",                "TARGET_CODE" )
+		 						 	 "OBSERVATION",               "GROUP_VARIABLES")
 			expectedModelBlocks <- c(expectedModelBlocks, "name")
 			readModelBlocks <- slotNames(myModelObj)
 			expect_equal(readModelBlocks, expectedModelBlocks, "Expected slots are present")
@@ -128,7 +126,7 @@ test_that(paste("Get Task Properties Object for",case), {
 			myTaskObj <- myTaskObj[[1]]
 			expect_is(myTaskObj, "taskObj", "Should be of class taskObj")
 			
-			expectedTaskBlocks <- c("ESTIMATE", "SIMULATE", "EVALUATE", "OPTIMISE", "DATA", "MODEL", "TARGET_CODE")
+			expectedTaskBlocks <- c("ESTIMATE", "SIMULATE")
 			expectedTaskBlocks <- c(expectedTaskBlocks, "name")
 			readTaskBlocks <- slotNames(myTaskObj)
 			expect_equal(readTaskBlocks, expectedTaskBlocks, "Expected slots are present")
