@@ -29,7 +29,7 @@ test_that(paste("bootstrap",case), {
 			resultDir <- getResultDir(case,target)
 			resultDirName <- basename(resultDir)
 			bootstrap <- try(bootstrap.PsN(mdlfile, samples=20, seed=876543,
-							bootstrapOptions=" -no-skip_minimization_terminated -threads=2",
+							bootstrapOptions=" -no-skip_minimization_terminated -threads=3",
 							subfolder=resultDirName) )
 			expect_false(class(bootstrap)=="try-error", "bootstrap.PsN Doesn't crash")
 			expect_is(bootstrap[[1]],"StandardOutputObject", "Bootstrap result should be an S4 class StandardOutputObject")
