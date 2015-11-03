@@ -1,7 +1,12 @@
 #
 # Global settings
 #
-library(testthat)
+if("testthat" %in% rownames(installed.packages())) {
+	library(testthat)
+} else {
+	warning("testthat library is required for using new testing API. Just manuall test scripts are supported now.")
+}
+
 
 #' What is the mode of the test script execution, 
 #' if HEADLESS=TRUE then different assumptions are being made regarding possible user's feedback and reports being created by testthat
