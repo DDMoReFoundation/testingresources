@@ -27,7 +27,8 @@ mdlfile <- getModel(case)
 
 test_that(paste("Estimating",case,"with NONMEM"), {
 			target <- "NONMEM"
-			resultDir <- getResultDir(case,target)
+			executionId <- format(Sys.time(),"%H%M%S")
+			resultDir <- getResultDir(case,target, id = executionId)
 			resultDirName <- basename(resultDir)
 			nm <- try(estimate(mdlfile, target=target, subfolder=resultDirName))
 			expect_false(class(nm)=="try-error", "estimate doesn't crash with errors")
