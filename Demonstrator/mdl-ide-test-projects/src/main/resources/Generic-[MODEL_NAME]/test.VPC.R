@@ -32,11 +32,12 @@ test_that(paste("VPC",case), {
 			target <- "VPC"
 			resultDir <- getResultDir(case,target)
 			resultDirName <- basename(resultDir)
-			vpcFiles <- try(VPC.PsN(mdlfile, 
+			vpcSO <- try(VPC.PsN(mdlfile, 
 							samples=100, seed=123456, 
 							subfolder=resultDirName, plot=FALSE)) 
-			expect_false(class(vpcFiles)=="try-error", "VPC.PsN Doesn't crash")
-			myVPCPlot <- xpose.VPC(vpc.info=vpcFiles$vpc.info,vpctab=vpcFiles$vpctab,main="VPC warfarin")
+			expect_false(class(vpcSO)=="try-error", "VPC.PsN Doesn't crash")
+			expect_is(vpcSO,"StandardOutputObject", "VPC result should be an S4 class StandardOutputObject")
+			myVPCPlot <- xpose.VPC(vpc.info=file.path(resultDir,vpcSO@RawResults@DataFiles$PsN_VPC_results$path),vpctab=file.path(resultDir,vpcSO@RawResults@DataFiles$PsN_VPC_vpctab$path),main="VPC warfarin")
 			expect_is(myVPCPlot,"trellis", "xpose.VPC Produces a plot")
 		}
 )
