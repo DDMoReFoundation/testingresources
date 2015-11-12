@@ -26,7 +26,7 @@ list.files()
 
 #' We can see the functions available in the TEL package. These are the "high level" functions which we would
 #' expect the user to use..
-objects("package:DDMoRe.TEL")
+objects("package:ddmore")
 
 #' Set name of .mdl file
 mdlfile <- "Warfarin-ODE-latest-Monolix.mdl" 

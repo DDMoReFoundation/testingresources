@@ -24,7 +24,7 @@ printMessage(paste("Working with", mdlfile))
 
 
 printMessage("List objects in the environment")
-objects("package:DDMoRe.TEL")
+objects("package:ddmore")
 
 
 printMessage("Loading in data object(s)")
