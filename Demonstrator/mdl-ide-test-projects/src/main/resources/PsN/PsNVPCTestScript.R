@@ -16,7 +16,7 @@ setwd(projectPath)
 projectPath = getwd();
 
 selectSupported <- function(models) {
-	supportedModels = list("models/UseCase1.mdl", "models/UseCase5_1.mdl")
+	supportedModels = list("models/UseCase1.mdl", "models/UseCase3.mdl")
 	models[unlist(lapply(models, function (x) { x %in% supportedModels } ))]
 }
 

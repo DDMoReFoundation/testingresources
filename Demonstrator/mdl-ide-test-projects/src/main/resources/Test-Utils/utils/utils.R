@@ -1,7 +1,12 @@
 #
 # Global settings
 #
-library(testthat)
+if("testthat" %in% rownames(installed.packages())) {
+	library(testthat)
+} else {
+	warning("testthat library is required for using new testing API. Just manuall test scripts are supported now.")
+}
+
 
 #' What is the mode of the test script execution, 
 #' if HEADLESS=TRUE then different assumptions are being made regarding possible user's feedback and reports being created by testthat
@@ -36,11 +41,7 @@ CACHE_ENTRY_FILE=".cacheEntry"
 
 #' Creates test that reporter based on the mode of the test harness (headless vs interactive)
 createReporter <- function() {
-	if(.HEADLESS) {
-		return(StopReporter$new())
-	} else {
-		return(SummaryReporter$new())
-	}
+	return(SummaryReporter$new())
 }
 
 #'
@@ -57,7 +58,16 @@ run <- function(code = NULL, env = parent.frame(), reporter = createReporter()) 
 	error <- try(eval(code, env))
 	reporter$end_reporter()
 	if(reporter$failed || class(error)=="try-error") {
-		stop(reporter$failures)
+		summary <- "FAILURE"
+		if(length(reporter$failures)>0) {
+			summary <- paste(summary, "There were the following failures:", sep="\n")
+			summary <- paste(summary,reporter$failures, sep="\n")
+		}
+		if(class(error)=="try-error") {
+			summary <- paste(summary, "Test failed with error: ", error, sep="\n")
+		}
+		# ensuring that script execution is marked as failed by ATH
+		stop(summary)
 	}
 }
 

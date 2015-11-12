@@ -29,21 +29,20 @@ test_that(paste("bootstrap",case), {
 			resultDir <- getResultDir(case,target)
 			resultDirName <- basename(resultDir)
 			bootstrap <- try(bootstrap.PsN(mdlfile, samples=20, seed=876543,
-							bootstrapOptions=" -no-skip_minimization_terminated -threads=2",
+							bootstrapOptions=" -no-skip_minimization_terminated -threads=3",
 							subfolder=resultDirName) )
 			expect_false(class(bootstrap)=="try-error", "bootstrap.PsN Doesn't crash")
-			expect_is(bootstrap[[1]],"StandardOutputObject", "Bootstrap result should be an S4 class StandardOutputObject")
-			bootstrapResults <- bootstrap[[1]]
+			expect_is(bootstrap,"StandardOutputObject", "Bootstrap result should be an S4 class StandardOutputObject")
 
 			# 
-			expect_false(is.null(bootstrapResults@Estimation@PopulationEstimates$Bootstrap$Mean$data), "Mean is populated")
-			expect_false(is.null(bootstrapResults@Estimation@PopulationEstimates$Bootstrap$Median$data), "Median is populated")
-			expect_false(is.null(bootstrapResults@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data), "Percentiles are populated")
+			expect_false(is.null(bootstrap@Estimation@PopulationEstimates$Bootstrap$Mean$data), "Mean is populated")
+			expect_false(is.null(bootstrap@Estimation@PopulationEstimates$Bootstrap$Median$data), "Median is populated")
+			expect_false(is.null(bootstrap@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data), "Percentiles are populated")
 
 			# ADD TEST FOR ASYMPTOTIC RESULTS AND CIs
-			# expect_false(is.null(bootstrapResults@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data))
+			# expect_false(is.null(bootstrap@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data))
 			
-			expect_false(is.null(getPopulationParameters(bootstrapResults)$Bootstrap), "getPopulationParameters returns appropriate values")
+			expect_false(is.null(getPopulationParameters(bootstrap)$Bootstrap), "getPopulationParameters returns appropriate values")
 
 			
 			
@@ -53,7 +52,7 @@ test_that(paste("bootstrap",case), {
 			}
 			
 			if(FALSE) {
-				bootstrapNames <- getPopulationParameters(bootstrapResults)$Bootstrap$Parameter
+				bootstrapNames <- getPopulationParameters(bootstrap)$Bootstrap$Parameter
 				parameterNames <- c(names(getParameterObjects(mdlfile)[[1]]@STRUCTURAL), names(getParameterObjects(mdlfile)[[1]]@VARIABILITY))
 				expect_identical(bootstrapNames, parameterNames, " All parameters should have a bootstrap result")
 			}
