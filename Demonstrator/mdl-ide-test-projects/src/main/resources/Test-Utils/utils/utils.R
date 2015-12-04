@@ -105,7 +105,7 @@ createXposeDatabases <- function(models.validated) {
                 printMessage(paste("Creating Xpose database for ",model[["modelFile"]]))
                 dataObj = getDataObjects(model[["modelFile"]])[[1]]
                 modelFileLocation = parent.folder(model[["modelFile"]])
-                model[["xpose"]] = as.xpdb(so,file.path(modelFileLocation,dataObj@SOURCE$file))
+                model[["xpose"]] = as.xpdb(so,file.path(modelFileLocation,dataObj@SOURCE[[1]]$file))
             } else {
                 errorMsg <- paste("There were errors when executing model",model[["modelFile"]],"skipping Xpose database creation")
                 printMessage(errorMsg)
@@ -147,7 +147,7 @@ verifyEstimate = function (so) {
     assert(!is.null(so),"SO object was null.",!.HEADLESS) &&
     assert(is.null(so@TaskInformation$Messages$Errors),paste0("There were error messages set on the SO ", so@TaskInformation$Messages$Errors),!.HEADLESS) &&
     assert(!is.null(so@Estimation@PopulationEstimates$MLE$data),"MLE values were not populated.", !.HEADLESS) &&
-    assert(!is.null(so@Estimation@Likelihood$Deviance),"Log-Likelihood element was not set.", !.HEADLESS)
+    assert(!(is.null(so@Estimation@Likelihood$Deviance)&&is.null(so@Estimation@Likelihood$LogLikelihood)),"Log-Likelihood element was not set.", !.HEADLESS)
 }
 
 #' Asserts that a given condition is met, if not it will print an error message and return FALSE
