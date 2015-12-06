@@ -55,7 +55,7 @@ update.warfarin.params.with.final.estimates <- function(parObj, soObj) {
 	myParObjUpdated <- updateParObj(myParObjUpdated,block="VARIABILITY",item=parNames[parNames%in%variabilityNames],with=list(value=parValues[parNames%in%variabilityNames]))
 #' A bug in the writeMogObj function means that for now, we must manually add the square bracket around the OMEGA value
 #' to signify that this is a vector (of length 1).
-	myParObjUpdated@VARIABILITY$OMEGA$value<-paste0("[",myParObjUpdated@VARIABILITY$OMEGA$value,"]")
+	#' myParObjUpdated@VARIABILITY$OMEGA$value<-paste0("[",myParObjUpdated@VARIABILITY$OMEGA$value,"]")
 	myParObjUpdated
 }
 
@@ -71,7 +71,9 @@ printMessage("Assembling the new mog")
 myNewMOGforVPC <- createMogObj(dataObj = myDataObj, parObj = myParObjUpdated, mdlObj = myModObj, taskObj = myTaskObj, "Warfarin_ODE_latest_VPC")
 
 printMessage("Running VPC (this can take about 5 minutes)")
-vpcSO <- VPC.PsN(myNewMOGforVPC,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",basename(mdlfile))));
+myNewMogFile<-file.path(getwd(),"models/Warfarin_ODE_latest_VPC.mdl")
+writeMogObj(myNewMOGforVPC,myNewMogFile)
+vpcSO <- VPC.PsN(myNewMogFile,samples=20, seed=1234, vpcOptions=" -threads=3", subfolder=.resultDir(paste0("PsNVPCTestScript-VPC-",basename(mdlfile))));
 
 printMessage("Check if the graph was produced")
 
