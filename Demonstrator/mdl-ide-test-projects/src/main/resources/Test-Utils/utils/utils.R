@@ -224,6 +224,18 @@ parent.folder <- function(f) {
     dirname(file_path_as_absolute(f))
 }
 
+##############################################################
+#' createSubDirectory
+#'
+#' Create a sub-directory of the currently set projectPath.
+#'
+#' @param the name of the sub-directory to create
+#' @param the absolute path of the project directory
+createSubDirectory <- function(name, projectPath) {
+	subDir<-file.path(projectPath,name)
+	dir.create(subDir)
+	subDir
+}
 
 .errors <- list()
 #################################################################
