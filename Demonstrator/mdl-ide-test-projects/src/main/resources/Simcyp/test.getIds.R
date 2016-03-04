@@ -18,7 +18,7 @@ initialize("Simcyp")
 projectPath=getwd()
 
 run ({
-context(paste("Simcyp","-","simcyp.test* functions"))
+context(paste("Simcyp","-","simcyp.get* functions"))
 
 test_that("simcyp.getPopulationIds returns list of population ids", {
             popIds <- simcyp.getPopulationIds()

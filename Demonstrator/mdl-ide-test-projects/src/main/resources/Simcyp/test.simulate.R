@@ -31,8 +31,8 @@ test_that("Simulate Backman workspace", {
             resultsDir<-simcyp.getResultsDirectory()
             expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
             expect_false(is.null(list.files(resultsDir,pattern="simcyp_standard_output\\.xml$")), "SO file exists")
-            expect_true(is.null(multiPop1_SO@TaskInformation$Messages$Errors), "There are no errors in SO")
-            expect_false(is.null(multiPop1_SO@Simulation@SimulationBlock$SimulationBlock@SimulatedProfiles$data), "SimulatedProfiles' data is populated")
+            expect_true(is.null(sim1_SO@TaskInformation$Messages$Errors), "There are no errors in SO")
+            expect_false(is.null(sim1_SO@Simulation@SimulationBlock$SimulationBlock@SimulatedProfiles$data), "SimulatedProfiles' data is populated")
        }
 )
 
