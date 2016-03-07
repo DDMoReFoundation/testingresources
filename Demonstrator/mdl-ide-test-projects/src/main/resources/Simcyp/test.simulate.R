@@ -23,8 +23,6 @@ run ({
 context(paste("Simcyp","-","simcyp.simulate function"))
 
 test_that("Simulate Backman workspace", {
-            setwd(createSubDirectory("simcyp.simulate-test1", projectPath))
-            
             sim1_SO <- simcyp.simulate(file_path_as_absolute(workspaceFile))
             
             expect_false(class(sim1_SO)=="try-error", "Doesn't crash with errors")
@@ -37,8 +35,6 @@ test_that("Simulate Backman workspace", {
 )
 
 test_that("Don't embed data in standard output", {
-            setwd(createSubDirectory("simcyp.simulate-test2", projectPath))
-            
             sim2_SO <- simcyp.simulate(file_path_as_absolute(workspaceFile), FALSE)
             expect_false(class(sim2_SO)=="try-error", "Doesn't crash with errors")
             resultsDir<-simcyp.getResultsDirectory()

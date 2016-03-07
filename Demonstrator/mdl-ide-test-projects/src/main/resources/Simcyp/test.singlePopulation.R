@@ -21,7 +21,6 @@ run ({
 context(paste("Simcyp","-","simcyp.generateSinglePopulation function"))
 
 test_that("Generates a SIM-OBESE population of 100 individuals", {
-            setwd(createSubDirectory("simcyp.generateSinglePopulation-test1", projectPath))
             popIds <- simcyp.getPopulationIds()
             
             singlePop1_SO <- simcyp.generateSinglePopulation(popIds[[11]], 100)
@@ -36,7 +35,6 @@ test_that("Generates a SIM-OBESE population of 100 individuals", {
 )
 
 test_that("Don't embed data in standard output", {
-            setwd(createSubDirectory("simcyp.generateSinglePopulation-test2", projectPath))
             popIds <- simcyp.getPopulationIds()
             
             singlePop2_SO <- simcyp.generateSinglePopulation(popIds[[7]], 0, FALSE)
@@ -51,7 +49,6 @@ test_that("Don't embed data in standard output", {
 )
 
 test_that("Just selected outputs included in the SO", {
-            setwd(createSubDirectory("simcyp.generateSinglePopulation-test3", projectPath))
             popIds <- simcyp.getPopulationIds()
             outIds <- simcyp.getOutputIds()
             

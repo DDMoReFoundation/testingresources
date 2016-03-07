@@ -21,7 +21,6 @@ run ({
 context(paste("Simcyp","-","simcyp.generateMultiplePopulations function"))
 
 test_that("Generates a SIM-OBESE population of 100 individuals", {
-            setwd(createSubDirectory("simcyp.generateMultiplePopulations-test1", projectPath))
             popIds <- simcyp.getPopulationIds()
 
             multiPop1_SO <- simcyp.generateMultiplePopulations(c(popIds[[2]], popIds[[10]]), c(75, 50))
@@ -37,7 +36,6 @@ test_that("Generates a SIM-OBESE population of 100 individuals", {
 )
 
 test_that("Don't embed data in standard output", {
-            setwd(createSubDirectory("simcyp.generateMultiplePopulations-test2", projectPath))
             popIds <- simcyp.getPopulationIds()
 
             multiPop2_SO <- simcyp.generateMultiplePopulations(c(popIds[[3]], popIds[[6]], 
