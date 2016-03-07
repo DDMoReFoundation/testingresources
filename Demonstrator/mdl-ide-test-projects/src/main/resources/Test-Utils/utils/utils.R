@@ -4,7 +4,7 @@
 if("testthat" %in% rownames(installed.packages())) {
 	library(testthat)
 } else {
-	warning("testthat library is required for using new testing API. Just manuall test scripts are supported now.")
+	warning("testthat library is required for using new testing API. Just manual test scripts are supported now.")
 }
 
 
@@ -39,7 +39,7 @@ if(!exists(".CACHE_DIR")) {
 #' Name of the file holding results traceback information
 CACHE_ENTRY_FILE=".cacheEntry"
 
-#' Creates test that reporter based on the mode of the test harness (headless vs interactive)
+#' Creates test that reporter that is used by testthat to collect assertions results
 createReporter <- function() {
 	return(SummaryReporter$new())
 }
@@ -139,6 +139,7 @@ estimateModelsWith <- function(models, target, mdlIdeProjectPath = projectPath, 
                 return(model)
             })
 }
+
 
 #' Verifies estimation results. Function stops with an error message if verfication fails.
 #' @param so - standard output object from an execution

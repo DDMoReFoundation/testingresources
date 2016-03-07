@@ -3,28 +3,10 @@ if(!exists(".MDLIDE_WORKSPACE_PATH") || is.null(.MDLIDE_WORKSPACE_PATH)) {
 }
 source(file.path(.MDLIDE_WORKSPACE_PATH,"Test-Utils/utils/utils.R"));
 
-projectPath="Simulix-Integration"
-modelsDir="models"
-setwd(.MDLIDE_WORKSPACE_PATH)
-setwd(projectPath)
+initialize("Simulx")
 projectPath=getwd()
 
-convertToPharmMLAndCopy <- function(model.mdl = NULL) {
-	if(is.null(model.mdl)) {
-		stop("No MDL model file was specfied");
-	}
-	print(paste("Converting ",model.mdl," to PharmML"))
-	model.pharmml <- as.PharmML(model.mdl)
-	
-	if(is.null(model.pharmml)) {
-		stop(paste("Couldn't generate pharmml for ", model.mdl))
-	}
-	
-	file.copy(model.pharmml, getwd(), overwrite=TRUE);
-	basename(model.pharmml)
-}
-
-pharmML.model <- convertToPharmMLAndCopy("models/UseCase1.mdl")
+pharmML.model <- as.PharmML(file.path(projectPath,"models/UseCase1.mdl"))
 
 #-------------------------------------
 library("gridExtra")
