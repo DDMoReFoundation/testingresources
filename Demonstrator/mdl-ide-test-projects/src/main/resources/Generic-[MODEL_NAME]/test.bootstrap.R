@@ -35,9 +35,9 @@ test_that(paste("bootstrap",case), {
 			expect_is(bootstrap,"StandardOutputObject", "Bootstrap result should be an S4 class StandardOutputObject")
 
 			# 
-			expect_false(is.null(bootstrap@Estimation@PopulationEstimates$Bootstrap$Mean$data), "Mean is populated")
-			expect_false(is.null(bootstrap@Estimation@PopulationEstimates$Bootstrap$Median$data), "Median is populated")
-			expect_false(is.null(bootstrap@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data), "Percentiles are populated")
+			expect_false(is.null(bootstrap@Estimation@PopulationEstimates@OtherMethod$Bootstrap@Mean@data), "Mean is populated")
+			expect_false(is.null(bootstrap@Estimation@PopulationEstimates@OtherMethod$Bootstrap@Median@data), "Median is populated")
+			expect_false(is.null(bootstrap@Estimation@PrecisionPopulationEstimates@OtherMethod$Bootstrap@PercentilesCI@data), "Percentiles are populated")
 
 			# ADD TEST FOR ASYMPTOTIC RESULTS AND CIs
 			# expect_false(is.null(bootstrap@Estimation@PrecisionPopulationEstimates$Bootstrap$Percentiles$data))

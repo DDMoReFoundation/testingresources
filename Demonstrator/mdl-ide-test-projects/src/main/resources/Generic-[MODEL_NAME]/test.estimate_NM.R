@@ -32,11 +32,12 @@ test_that(paste("Estimating",case,"with NONMEM"), {
 			resultDirName <- basename(resultDir)
 			nm <- try(estimate(mdlfile, target=target, subfolder=resultDirName))
 			expect_false(class(nm)=="try-error", "estimate doesn't crash with errors")
+			
 			expect_false(is.null(list.files(resultDir)), "SOME content in subfolder") 
 			expect_false(is.null(list.files(resultDir,pattern="\\.SO.xml$")), "SO file exists")
-			expect_true(is.null(nm@TaskInformation$Messages$Errors), "There are No errors in SO")
-			expect_false(is.null(nm@Estimation@PopulationEstimates$MLE$data), "MLE values are populated")
-			expect_false(is.null(nm@Estimation@Likelihood$Deviance), "Log-Likelihood value is populated")
+			expect_equal(length(nm@TaskInformation@ErrorMessages),0, "There are No errors in SO")
+			expect_false(is.null(nm@Estimation@PopulationEstimates@MLE@data), "MLE values are populated")
+			expect_false(is.null(nm@Estimation@OFMeasures@Deviance), "Log-Likelihood value is populated")
 			
 			if(!testthat:::get_reporter()$failed) {
 				#If any of the above tests failed, don't promote the result (i.e. don't make it available for subsequent tests)

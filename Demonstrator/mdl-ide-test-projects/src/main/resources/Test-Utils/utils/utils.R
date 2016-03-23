@@ -7,6 +7,7 @@ if("testthat" %in% rownames(installed.packages())) {
 	warning("testthat library is required for using new testing API. Just manual test scripts are supported now.")
 }
 
+library("rjson")
 
 #' What is the mode of the test script execution, 
 #' if HEADLESS=TRUE then different assumptions are being made regarding possible user's feedback and reports being created by testthat

@@ -34,9 +34,9 @@ test_that(paste("Estimating",case,"with Monolix"), {
 			print(mlx)
 			expect_false(is.null(list.files(resultDir)), "There is SOME content in subfolder")
 			expect_false(is.null(list.files(resultDir,pattern="\\.SO.xml$")), "SO file exists")
-			expect_true(is.null(mlx@TaskInformation$Messages$Errors), "There are No errors") 
-			expect_false(is.null(mlx@Estimation@PopulationEstimates$MLE$data), "MLE values are populated")
-			expect_false(is.null(mlx@Estimation@Likelihood$LogLikelihood), "Log-Likelihood value is populated")
+			expect_equal(length(nm@TaskInformation@ErrorMessages),0, "There are No errors in SO")
+			expect_false(is.null(nm@Estimation@PopulationEstimates@MLE@data), "MLE values are populated")
+			expect_false(is.null(nm@Estimation@OFMeasures@LogLikelihood), "Log-Likelihood value is populated")
 			
 			if(!testthat:::get_reporter()$failed) {
 				#If any of the above tests failed, don't promote the result (i.e. don't make it available for subsequent tests)
