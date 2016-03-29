@@ -28,9 +28,9 @@ test_that("Simulate Backman workspace", {
             expect_false(class(sim1_SO)=="try-error", "Doesn't crash with errors")
             resultsDir<-simcyp.getResultsDirectory()
             expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="simcyp_standard_output\\.xml$")), "SO file exists")
-            expect_true(is.null(sim1_SO@TaskInformation$Messages$Errors), "There are no errors in SO")
-            expect_false(is.null(sim1_SO@Simulation@SimulationBlock$SimulationBlock@SimulatedProfiles$data), "SimulatedProfiles' data is populated")
+            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
+            expect_equal(length(sim1_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
+            expect_false(is.null(sim1_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
        }
 )
 
@@ -39,9 +39,9 @@ test_that("Don't embed data in standard output", {
             expect_false(class(sim2_SO)=="try-error", "Doesn't crash with errors")
             resultsDir<-simcyp.getResultsDirectory()
             expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="simcyp_standard_output\\.xml$")), "SO file exists")
-            expect_true(is.null(sim2_SO@TaskInformation$Messages$Errors), "There are no errors in SO")
-            expect_false(is.null(sim2_SO@Simulation@SimulationBlock$SimulationBlock@SimulatedProfiles$data), "SimulatedProfiles' data is populated")
+            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
+            expect_equal(length(sim2_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
+            expect_false(is.null(sim2_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
         }
 )
 })
