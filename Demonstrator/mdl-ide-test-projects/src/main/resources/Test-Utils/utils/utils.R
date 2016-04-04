@@ -313,7 +313,7 @@ getResult <- function (modelPath, target, projectPath = getwd(), id = "") {
 #'
 copy.dir <- function(from, to) {
 	if (!file.exists(to)) {
-		dir.create(to)
+		dir.create(to, recursive=TRUE)
 	}
 	all.regular.files <- list.files(from, pattern=".*")
 	files.to.copy <- paste0(from, "/", all.regular.files) # Turn the filenames into full paths
