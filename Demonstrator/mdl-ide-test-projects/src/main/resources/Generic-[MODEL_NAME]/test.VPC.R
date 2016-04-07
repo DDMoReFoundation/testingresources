@@ -37,6 +37,7 @@ test_that(paste("VPC",case), {
 							subfolder=resultDirName, plot=FALSE)) 
 			expect_false(class(vpcSO)=="try-error", "VPC.PsN Doesn't crash")
 			expect_is(vpcSO,"StandardOutputObject", "VPC result should be an S4 class StandardOutputObject")
+			expect_equal(length(vpcSO@TaskInformation@ErrorMessages),0, "There are no errors in SO")
 			myVPCPlot <- xpose.VPC(vpc.info=file.path(resultDir,vpcSO@RawResults@DataFiles$PsN_VPC_results$path),vpctab=file.path(resultDir,vpcSO@RawResults@DataFiles$PsN_VPC_vpctab$path),main="VPC warfarin")
 			expect_is(myVPCPlot,"trellis", "xpose.VPC Produces a plot")
 		}
