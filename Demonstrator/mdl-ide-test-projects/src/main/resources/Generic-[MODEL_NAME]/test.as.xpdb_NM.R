@@ -1,6 +1,5 @@
-# PURPOSE: Test TEL estimate
-# DESCRIPTION: Runs estimation with Monolix / NONMEM
-#   and provides an automated test that each case runs successfully. 
+# PURPOSE: Test as.xpdb for NONMEM output
+# DESCRIPTION: Imports NONMEM results and parses imports them as XPDB object.
 #   NB: DOES NOT test that the answer is *correct*, just that there are no errors
 # TODO: 
 #   In testing as.xpdb need to find a good way to check expected rows in xpdb vs rawData
@@ -22,7 +21,7 @@ projectPath=getwd()
 
 run ({
 case<-"[MODEL_DIR]/[MODEL_NAME]"
-contextDetail <- "as.xpbd"
+contextDetail <- "as.xpdb"
 context(paste(case,"-",contextDetail))
 
 mdlfile <- getModel(case)

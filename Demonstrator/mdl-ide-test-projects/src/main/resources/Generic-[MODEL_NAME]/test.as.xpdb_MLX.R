@@ -1,7 +1,7 @@
-# PURPOSE: Test TEL estimate
-# DESCRIPTION: Runs estimation with Monolix / NONMEM
-#   and provides an automated test that each case runs successfully. 
+# PURPOSE: Test as.xpdb for Monolix output
+# DESCRIPTION: Imports Monolix results and parses imports them as XPDB object.
 #   NB: DOES NOT test that the answer is *correct*, just that there are no errors
+#
 # TODO: 
 #   In testing as.xpdb need to find a good way to check expected rows in xpdb vs rawData
 # 
@@ -22,7 +22,7 @@ projectPath=getwd()
 
 run ({
 case<-"[MODEL_DIR]/[MODEL_NAME]"
-contextDetail <- "as.xpbd"
+contextDetail <- "as.xpdb"
 context(paste(case,"-",contextDetail))
 mdlfile <- getModel(case)
 importPromotedResultDir(case, target="MONOLIX")
@@ -36,7 +36,7 @@ test_that(paste("Converting Monolix output for",case,"to XPDB"), {
 			expect_true(nrow(mlx.xpdb@Data)>0, "Some data in the merged dataset")
 			# Number of rows in xpdb@Data = nrows in dataset where MDV != 0 
 			#rawData <- readDataObj(getDataObjects(mdlfile)[[1]])
-			#expect_equal(nrow(nm.xpdb@Data), nrow(subset.data.frame(rawData, (MDV==0)))) 
+			#expect_equal(nrow(mlx.xpdb@Data), nrow(subset.data.frame(rawData, (MDV==0)))) 
 		}
 )
 
