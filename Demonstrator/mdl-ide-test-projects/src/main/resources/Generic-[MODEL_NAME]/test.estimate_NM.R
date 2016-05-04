@@ -1,5 +1,5 @@
 # PURPOSE: Test TEL estimate
-# DESCRIPTION: Runs estimation with Monolix / NONMEM
+# DESCRIPTION: Runs estimation with NONMEM
 #   and provides an automated test that each case runs successfully. 
 #   NB: DOES NOT test that the answer is *correct*, just that there are no errors
 # TODO: 
