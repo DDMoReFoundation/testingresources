@@ -1,6 +1,9 @@
-# PURPOSE: Test TEL MDL reading functions
-# DESCRIPTION: Reads MDL file and checks that objects are of correct type and structure
+# PURPOSE: Test TEL estimate
+# DESCRIPTION: Runs estimation with Monolix
+#   and provides an automated test that each case runs successfully. 
+#   NB: DOES NOT test that the answer is *correct*, just that there are no errors
 # TODO: 
+#   In testing as.xpdb need to find a good way to check expected rows in xpdb vs rawData
 # 
 # Author: smith_mk
 # Date: 03 Aug 2015
