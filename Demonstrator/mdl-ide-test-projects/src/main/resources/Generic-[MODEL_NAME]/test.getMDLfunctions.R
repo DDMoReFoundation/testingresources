@@ -126,7 +126,7 @@ test_that(paste("Get Task Properties Object for",case), {
 			myTaskObj <- myTaskObj[[1]]
 			expect_is(myTaskObj, "taskObj", "Should be of class taskObj")
 			
-			expectedTaskBlocks <- c("ESTIMATE", "SIMULATE")
+			expectedTaskBlocks <- c("ESTIMATE", "SIMULATE", "EVALUATE")
 			expectedTaskBlocks <- c(expectedTaskBlocks, "name")
 			readTaskBlocks <- slotNames(myTaskObj)
 			expect_equal(readTaskBlocks, expectedTaskBlocks, "Expected slots are present")
