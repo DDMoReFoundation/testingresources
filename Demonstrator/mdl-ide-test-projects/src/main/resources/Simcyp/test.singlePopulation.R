@@ -21,7 +21,7 @@ run ({
 context(paste("Simcyp","-","simcyp.generateSinglePopulation function"))
 
 test_that("Generates a SIM-OBESE population of 100 individuals", {
-            popIds <- simcyp.getPopulationIds()
+            popIds <- simcyp.getPopulationIDs()
             
             singlePop1_SO <- simcyp.generateSinglePopulation(popIds[[11]], 100)
             
@@ -35,7 +35,7 @@ test_that("Generates a SIM-OBESE population of 100 individuals", {
 )
 
 test_that("Don't embed data in standard output", {
-            popIds <- simcyp.getPopulationIds()
+            popIds <- simcyp.getPopulationIDs()
             
             singlePop2_SO <- simcyp.generateSinglePopulation(popIds[[7]], 0, FALSE)
             
@@ -49,8 +49,8 @@ test_that("Don't embed data in standard output", {
 )
 
 test_that("Just selected outputs included in the SO", {
-            popIds <- simcyp.getPopulationIds()
-            outIds <- simcyp.getOutputIds()
+            popIds <- simcyp.getPopulationIDs()
+            outIds <- simcyp.getOutputIDs()
             
             singlePop3_SO <- simcyp.generateSinglePopulation(popIds[[7]], 1000, outputIds = c(outIds[[5]], outIds[[7]]))
             
