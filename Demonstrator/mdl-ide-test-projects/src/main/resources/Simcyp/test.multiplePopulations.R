@@ -21,7 +21,7 @@ run ({
 context(paste("Simcyp","-","simcyp.generateMultiplePopulations function"))
 
 test_that("Generates a SIM-OBESE population of 100 individuals", {
-            popIds <- simcyp.getPopulationIds()
+            popIds <- simcyp.getPopulationIDs()
 
             multiPop1_SO <- simcyp.generateMultiplePopulations(c(popIds[[2]], popIds[[10]]), c(75, 50))
 
@@ -36,7 +36,7 @@ test_that("Generates a SIM-OBESE population of 100 individuals", {
 )
 
 test_that("Don't embed data in standard output", {
-            popIds <- simcyp.getPopulationIds()
+            popIds <- simcyp.getPopulationIDs()
 
             multiPop2_SO <- simcyp.generateMultiplePopulations(c(popIds[[3]], popIds[[6]], 
                                                             popIds[[8]], popIds[[16]]), 250, FALSE)

@@ -21,14 +21,14 @@ run ({
 context(paste("Simcyp","-","simcyp.get* functions"))
 
 test_that("simcyp.getPopulationIds returns list of population ids", {
-            popIds <- simcyp.getPopulationIds()
+            popIds <- simcyp.getPopulationIDs()
             expect_is(popIds, "list")
             expect_true(length(popIds)>0, "Expect some ids have been generated")
         }
 )
 
 test_that("simcyp.getOutputIds returns list of output ids", {
-            outIds <- simcyp.getOutputIds()
+            outIds <- simcyp.getOutputIDs()
             expect_is(outIds, "list")
             expect_true(length(outIds)>0, "Expect some ids have been generated")
         }
