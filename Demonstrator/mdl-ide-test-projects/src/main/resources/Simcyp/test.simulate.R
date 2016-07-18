@@ -26,9 +26,6 @@ test_that("Simulate Backman workspace", {
             sim1_SO <- simcyp.simulate(file_path_as_absolute(workspaceFile))
             
             expect_false(class(sim1_SO)=="try-error", "Doesn't crash with errors")
-            resultsDir<-simcyp.getResultsDirectory()
-            expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
             expect_equal(length(sim1_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
             expect_false(is.null(sim1_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
        }
@@ -37,9 +34,6 @@ test_that("Simulate Backman workspace", {
 test_that("Don't embed data in standard output", {
             sim2_SO <- simcyp.simulate(file_path_as_absolute(workspaceFile), FALSE)
             expect_false(class(sim2_SO)=="try-error", "Doesn't crash with errors")
-            resultsDir<-simcyp.getResultsDirectory()
-            expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
             expect_equal(length(sim2_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
             expect_false(is.null(sim2_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
         }

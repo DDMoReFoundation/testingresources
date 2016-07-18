@@ -26,9 +26,6 @@ test_that("Generates a SIM-OBESE population of 100 individuals", {
             singlePop1_SO <- simcyp.generateSinglePopulation(popIds[[11]], 100)
             
             expect_false(class(singlePop1_SO)=="try-error", "Doesn't crash with errors")
-            resultsDir<-simcyp.getResultsDirectory()
-            expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
             expect_equal(length(singlePop1_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
             expect_false(is.null(singlePop1_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
        }
@@ -40,9 +37,6 @@ test_that("Don't embed data in standard output", {
             singlePop2_SO <- simcyp.generateSinglePopulation(popIds[[7]], 0, FALSE)
             
             expect_false(class(singlePop2_SO)=="try-error", "Doesn't crash with errors")
-            resultsDir<-simcyp.getResultsDirectory()
-            expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
             expect_equal(length(singlePop2_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
             expect_false(is.null(singlePop2_SO@Simulation$SimulationBlock@SimulatedProfiles[[1]]@data), "SimulatedProfiles' data is populated")
        }
@@ -55,9 +49,6 @@ test_that("Just selected outputs included in the SO", {
             singlePop3_SO <- simcyp.generateSinglePopulation(popIds[[7]], 1000, outputIds = c(outIds[[5]], outIds[[7]]))
             
             expect_false(class(singlePop3_SO)=="try-error", "Doesn't crash with errors")
-            resultsDir<-simcyp.getResultsDirectory()
-            expect_false(is.null(list.files(resultsDir)), "SOME content in results directory") 
-            expect_false(is.null(list.files(resultsDir,pattern="SO\\.xml$")), "SO file exists")
             expect_equal(length(singlePop3_SO@TaskInformation@ErrorMessages),0, "There are No errors in SO")
             expect_false(is.null(singlePop3_SO@Simulation$SimulationBlock@IndivParameters[[1]]@data), "IndivParameters' data is populated")
        }
